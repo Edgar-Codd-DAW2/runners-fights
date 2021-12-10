@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //public GameObject BulletPreFab;
+    public GameObject bulletPreFab;
     public float jumpForce;
     //public float Speed;
 
@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     private float horizontal;
     public bool grounded;
-    //private float LastShot;
+    private float lastShot;
 
     void Start()
     {
@@ -44,11 +44,11 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-        /*if (Input.GetKey(KeyCode.Space) && Time.time > LastShot + 0.25f)
+        if (Input.GetKey(KeyCode.J) && Time.time > lastShot + 0.25f)
         {
             Shoot();
-            LastShot = Time.time;
-        }*/
+            lastShot = Time.time;
+        }
 
     }
 
@@ -57,15 +57,15 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2D.AddForce(Vector2.up * jumpForce);
     }
 
-    /*private void Shoot()
+    private void Shoot()
     {
         Vector3 direction;
         if (transform.localScale.x == 1) direction = Vector2.right;
         else direction = Vector2.left;
 
-     GameObject bullet = Instantiate(BulletPreFab, transform.position + direction * 0.1f, Quaternion.identity);
+     GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.1f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
-    }*/
+    }
 
     private void FixedUpdate()
     {
