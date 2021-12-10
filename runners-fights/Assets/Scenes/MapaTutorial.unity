@@ -2275,7 +2275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624922384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.83, y: -7.32, z: -10}
+  m_LocalPosition: {x: 0.03, y: -0.46, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1806003303}
@@ -2417,6 +2417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2afb9a9b694eba94596b4600a5877df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPreFab: {fileID: 3591060556484616385, guid: c3223a50a36a65d4f88a8ead0540d0b4,
+    type: 3}
   jumpForce: 300
   animator: {fileID: 0}
   grounded: 0

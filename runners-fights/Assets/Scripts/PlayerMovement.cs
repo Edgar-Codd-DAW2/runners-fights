@@ -60,10 +60,10 @@ public class PlayerMovement : MonoBehaviour
     private void Shoot()
     {
         Vector3 direction;
-        if (transform.localScale.x == 1) direction = Vector2.right;
+        if (transform.localScale.x == 1.0f) direction = Vector2.right;
         else direction = Vector2.left;
 
-     GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.1f, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
     }
 
