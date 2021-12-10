@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     //public float Speed;
 
     private Rigidbody2D rigidbody2D;
-    private Animator animator;
+    public Animator animator;
     private float horizontal;
     public bool grounded;
     //private float LastShot;
@@ -17,15 +17,15 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        //Animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        /*if (Horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        else if (Horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);*/
+        if (horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        else if (horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
         animator.SetBool("running", horizontal != 0.0f);
 
