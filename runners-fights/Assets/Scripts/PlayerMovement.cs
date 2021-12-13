@@ -12,6 +12,7 @@ public enum PlayerState
 
 public class PlayerMovement : MonoBehaviour
 {
+    public PlayerState currentState;
     public GameObject bulletPreFab;
     public float jumpForce;
     //public float Speed;
@@ -23,20 +24,32 @@ public class PlayerMovement : MonoBehaviour
     private float lastShot;
     public float speed;
 
+    private SpriteRenderer myRenderer;
+    private Shader shaderGUItext;
+    private Shader shaderSpritesDefault;
+
     void Start()
     {
+        currentState = PlayerState.walk;
         rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        myRenderer = gameObject.GetComponent<SpriteRenderer>();
+        shaderGUItext = Shader.Find("GUI/Text Shader");
+        shaderSpritesDefault = Shader.Find("Sprites/Default");
     }
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        if (currentState != PlayerState.defend)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        else if (horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            if (horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            else if (horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-        animator.SetBool("running", horizontal != 0.0f);
+            animator.SetBool("running", horizontal != 0.0f);
+        }
 
         Debug.DrawRay(transform.position, Vector3.down * 2.2f, Color.red);
         if (Physics2D.Raycast(transform.position, Vector3.down, 2.2f)) 
@@ -48,15 +61,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.W) && grounded)
+        if (Input.GetKeyDown(KeyCode.W) && grounded && currentState != PlayerState.defend)
         {
             Jump();
         }
 
-        if (Input.GetKey(KeyCode.J) && Time.time > lastShot + 0.25f)
+        if (Input.GetKey(KeyCode.J) && Time.time > lastShot + 0.25f && currentState != PlayerState.defend)
         {
             Shoot();
             lastShot = Time.time;
+        }
+
+        if (Input.GetKey(KeyCode.K))
+        {
+            StartCoroutine(DefendCo());
         }
 
     }
@@ -79,5 +97,29 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y);
+    }
+
+    private IEnumerator DefendCo()
+    {
+        currentState = PlayerState.defend;
+        yield return null;
+        myRenderer.material.shader = shaderGUItext;
+        myRenderer.color = Color.white;
+        yield return new WaitForSeconds(3f);
+        myRenderer.material.shader = shaderSpritesDefault;
+        myRenderer.color = Color.white;
+        currentState = PlayerState.walk;
+    }
+
+    private void whiteSprite()
+    {
+        myRenderer.material.shader = shaderGUItext;
+        myRenderer.color = Color.white;
+    }
+
+    private void normalSprite()
+    {
+        myRenderer.material.shader = shaderSpritesDefault;
+        myRenderer.color = Color.white;
     }
 }
