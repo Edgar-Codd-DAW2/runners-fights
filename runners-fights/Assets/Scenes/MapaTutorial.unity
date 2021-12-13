@@ -152,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144091583}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.3, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 489978485}
@@ -2220,6 +2220,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1806003299}
+    - target: {fileID: 3355712372185204035, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3355712372185204039, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
         type: 3}
       propertyPath: m_Name
@@ -2493,9 +2498,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPreFab: {fileID: 3591060556484616385, guid: c3223a50a36a65d4f88a8ead0540d0b4,
     type: 3}
-  jumpForce: 600
+  jumpForce: 300
   animator: {fileID: 0}
   grounded: 0
+  speed: 7
 --- !u!95 &1806003305
 Animator:
   serializedVersion: 3

@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum PlayerState
+{
+    walk,
+    defend
+}
+
+
 public class PlayerMovement : MonoBehaviour
 {
     public GameObject bulletPreFab;
@@ -13,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     public bool grounded;
     private float lastShot;
+    public float speed;
 
     void Start()
     {
@@ -69,6 +78,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody2D.velocity = new Vector2(horizontal, rigidbody2D.velocity.y);
+        rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y);
     }
 }
