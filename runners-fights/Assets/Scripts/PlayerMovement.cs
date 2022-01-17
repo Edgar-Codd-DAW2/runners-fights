@@ -28,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
     private Shader shaderGUItext;
     private Shader shaderSpritesDefault;
 
+   
+    public bool usingLadder = false;
+
     void Start()
     {
         currentState = PlayerState.walk;
@@ -56,12 +59,13 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded = true;
         } else 
-        {
+       
             grounded = false;
         }
 
 
-        if (Input.GetKeyDown(KeyCode.W) && grounded && currentState != PlayerState.defend)
+        if (Input.GetKeyDown(KeyCode.W) && !onLadder 
+        && grounded && currentState != PlayerState.defend)
         {
             Jump();
         }
@@ -82,6 +86,11 @@ public class PlayerMovement : MonoBehaviour
     private void Jump() 
     {
         rigidbody2D.AddForce(Vector2.up * jumpForce);
+
+        if (!usingLadder)
+        {
+            animator.SetFloat("speed", rigidbody2D.velocity.y);
+        }
     }
 
     private void Shoot()
