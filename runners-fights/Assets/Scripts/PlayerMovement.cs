@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private Shader shaderGUItext;
     private Shader shaderSpritesDefault;
 
+
    
     public bool usingLadder = false;
 
@@ -54,18 +55,19 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("running", horizontal != 0.0f);
         }
 
-        Debug.DrawRay(transform.position, Vector3.down * 2.2f, Color.red);
+        /*Debug.DrawRay(transform.position, Vector3.down * 2.2f, Color.red);
         if (Physics2D.Raycast(transform.position, Vector3.down, 2.2f)) 
         {
             grounded = true;
         } else {
        
             grounded = false;
-        }
+        }*/
+
+        grounded = CheckGrounded.isGrounded;
 
 
-        if (Input.GetKeyDown(KeyCode.W)
-        && grounded && currentState != PlayerState.defend)
+        if (Input.GetKeyDown(KeyCode.W)  && grounded && currentState != PlayerState.defend)
         {
             Jump();
         }
@@ -87,10 +89,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody2D.AddForce(Vector2.up * jumpForce);
 
-        if (!usingLadder)
-        {
-            animator.SetFloat("speed", rigidbody2D.velocity.y);
-        }
+
+        animator.SetFloat("speed", rigidbody2D.velocity.y);
     }
 
     private void Shoot()

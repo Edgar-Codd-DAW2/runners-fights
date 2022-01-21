@@ -10,11 +10,23 @@ public class CheckGrounded : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        isGrounded = true;
+            isGrounded = true;
+            Debug.Log("Enter " + collision.name + " " + gameObject.name);
+        
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        
+            isGrounded = true;
+            Debug.Log("Stay");
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isGrounded = false;
+        
+            isGrounded = false;
+            Debug.Log("Out");
+        
     }
 }
