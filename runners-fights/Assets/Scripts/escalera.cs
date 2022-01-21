@@ -41,8 +41,8 @@ public class escalera : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
             }
-            anim.setBool("onLadder", onLadder);
-            anim.SetFloat("speed", Mathf.Abs(Input.GetAxisRaw("Vertical")))
+            anim.SetBool("onLadder", onLadder);
+            anim.SetFloat("speed", Mathf.Abs(Input.GetAxisRaw("Vertical")));
         }
     }
 
@@ -52,7 +52,7 @@ public class escalera : MonoBehaviour
         {
             rb.gravityScale = 1;
             onLadder = false;
-            controller.usindLadder = onLadder;
+            controller.usingLadder = onLadder;
             ground.enabled = true;
 
          

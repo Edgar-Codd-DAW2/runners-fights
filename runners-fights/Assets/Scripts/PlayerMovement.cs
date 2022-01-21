@@ -58,13 +58,13 @@ public class PlayerMovement : MonoBehaviour
         if (Physics2D.Raycast(transform.position, Vector3.down, 2.2f)) 
         {
             grounded = true;
-        } else 
+        } else {
        
             grounded = false;
         }
 
 
-        if (Input.GetKeyDown(KeyCode.W) && !onLadder 
+        if (Input.GetKeyDown(KeyCode.W)
         && grounded && currentState != PlayerState.defend)
         {
             Jump();
