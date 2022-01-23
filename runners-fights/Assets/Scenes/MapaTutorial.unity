@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 144091587}
   - component: {fileID: 144091586}
   - component: {fileID: 144091585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,9 +209,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -736167665
+  m_SortingLayer: -1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1947,9 +1947,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 235510898}
-  - component: {fileID: 235510900}
   - component: {fileID: 235510899}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: CheckGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1964,8 +1963,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 235510897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12, y: -2.13, z: 0}
-  m_LocalScale: {x: 0.42998844, y: 0.24923103, z: 0.7518282}
+  m_LocalPosition: {x: 0.135, y: -2.265, z: 0}
+  m_LocalScale: {x: 1.0080338, y: 0.24923103, z: 0.7518282}
   m_Children: []
   m_Father: {fileID: 1806003303}
   m_RootOrder: 1
@@ -1983,7 +1982,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.62877774}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1994,20 +1993,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.49082845}
   m_EdgeRadius: 0
---- !u!114 &235510900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235510897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f530033dcda827408b7d13d1f08d9f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &241649091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2427,8 +2414,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -736167665
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2835,11 +2822,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 3
+  m_Material: {fileID: 6200000, guid: bbc6ac97d682cef45bbf1e8dd9646c14, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &1806003302
 SpriteRenderer:
@@ -2878,9 +2865,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: 1262205889
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 765eec3a5138ce04d8d94e2f751d0083, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2923,10 +2910,15 @@ MonoBehaviour:
   currentState: 0
   bulletPreFab: {fileID: 3591060556484616385, guid: c3223a50a36a65d4f88a8ead0540d0b4,
     type: 3}
-  jumpForce: 300
+  jumpForce: 800
   animator: {fileID: 0}
   grounded: 0
   speed: 7
+  checkGround: {fileID: 235510898}
+  checkRadius: 0.3
+  platformLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   usingLadder: 0
 --- !u!95 &1806003305
 Animator:

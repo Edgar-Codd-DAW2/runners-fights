@@ -18,11 +18,14 @@ public class PlayerMovement : MonoBehaviour
     //public float Speed;
 
     private Rigidbody2D rigidbody2D;
-    public Animator animator;
     private float horizontal;
-    public bool grounded;
     private float lastShot;
+    public Animator animator;
+    public bool grounded;
     public float speed;
+    public Transform checkGround;
+    public float checkRadius;
+    public LayerMask platformLayerMask;
 
     private SpriteRenderer myRenderer;
     private Shader shaderGUItext;
@@ -64,7 +67,8 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }*/
 
-        grounded = CheckGrounded.isGrounded;
+
+        grounded = Physics2D.OverlapBox(checkGround.GetComponent<BoxCollider2D>().bounds.center, checkGround.GetComponent<BoxCollider2D>().bounds.size, 0f, platformLayerMask);
 
 
         if (Input.GetKeyDown(KeyCode.W)  && grounded && currentState != PlayerState.defend)
@@ -78,14 +82,20 @@ public class PlayerMovement : MonoBehaviour
             lastShot = Time.time;
         }
 
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.K) && !animator.GetBool("running"))
         {
             StartCoroutine(DefendCo());
         }
 
     }
 
-    private void Jump() 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(checkGround.GetComponent<BoxCollider2D>().bounds.center, checkGround.GetComponent<BoxCollider2D>().bounds.size);
+    }
+
+        private void Jump() 
     {
         rigidbody2D.AddForce(Vector2.up * jumpForce);
 
