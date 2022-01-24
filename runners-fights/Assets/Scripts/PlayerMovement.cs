@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public bool grounded;
     public float speed;
     public Transform checkGround;
-    public float checkRadius;
+    public Vector3 checkBoxSize;
     public LayerMask platformLayerMask;
 
     private SpriteRenderer myRenderer;
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         }*/
 
 
-        grounded = Physics2D.OverlapBox(checkGround.GetComponent<BoxCollider2D>().bounds.center, checkGround.GetComponent<BoxCollider2D>().bounds.size, 0f, platformLayerMask);
+        grounded = Physics2D.OverlapBox(checkGround.position, checkBoxSize, 0f, platformLayerMask);
 
 
         if (Input.GetKeyDown(KeyCode.W)  && grounded && currentState != PlayerState.defend)
@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(checkGround.GetComponent<BoxCollider2D>().bounds.center, checkGround.GetComponent<BoxCollider2D>().bounds.size);
+        Gizmos.DrawWireCube(checkGround.position, checkBoxSize);
     }
 
         private void Jump() 
@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2D.AddForce(Vector2.up * jumpForce);
 
 
-        animator.SetFloat("speed", rigidbody2D.velocity.y);
+        //animator.SetFloat("speed", rigidbody2D.velocity.y);
     }
 
     private void Shoot()
