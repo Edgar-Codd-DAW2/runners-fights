@@ -6,8 +6,8 @@ public class BulletScript : MonoBehaviour
 {
     public AudioClip sound;
     public float speed;
-   
 
+    public float LastShoot;
     private Rigidbody2D rigidbody2D;
     private Vector2 direction;
 
@@ -22,9 +22,13 @@ public class BulletScript : MonoBehaviour
         if (direction == Vector2.left) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         else transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         rigidbody2D.velocity = direction * speed;
-        
 
-       
+        if (LastShoot > 0)
+        {
+            LastShoot -= Time.deltaTime;
+        } else {
+            DestroyBullet();
+        }
     }
 
     public void SetDirection(Vector2 direction)
@@ -35,6 +39,23 @@ public class BulletScript : MonoBehaviour
     public void DestroyBullet()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerMovement player1 = collision.GetComponent<PlayerMovement>();
+        TurretScript turrets = collision.GetComponent<TurretScript>();
+        Debug.Log(collision);
+        if (player1 != null)
+        {
+            player1.Hit();
+            DestroyBullet();
+        }
+
+        /*if (turrets != null)
+        {
+            turrets.Hit();
+        }*/
     }
 
 

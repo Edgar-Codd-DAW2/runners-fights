@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     private float horizontal;
     private float lastShot;
+    private int Health = 5;
     public Animator animator;
     public bool grounded;
     public float speed;
@@ -140,5 +141,11 @@ public class PlayerMovement : MonoBehaviour
     {
         myRenderer.material.shader = shaderSpritesDefault;
         myRenderer.color = Color.white;
+    }
+
+    public void Hit()
+    {
+        Health = Health - 1;
+        if (Health == 0) Destroy(gameObject);
     }
 }

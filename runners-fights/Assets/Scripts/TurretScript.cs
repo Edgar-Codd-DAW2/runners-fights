@@ -6,6 +6,7 @@ public class TurretScript : MonoBehaviour
 {
     public GameObject player;
     public GameObject BulletPreFab;
+    public Transform bulletPosicion;
 
     private float LastShoot;
     private int Health = 3;
@@ -13,34 +14,37 @@ public class TurretScript : MonoBehaviour
     private void Update()
     {
         if (player == null) return;
+        float distanceY = player.transform.position.y - transform.position.y;
+        if (distanceY < 2.0f && distanceY > -2.0f) {
 
-        Vector3 direction = player.transform.position - transform.position;
-        if (direction.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            Vector3 direction = player.transform.position - transform.position;
+            if (direction.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 
-        float distance = Mathf.Abs(player.transform.position.x - transform.position.x);
-/*
-        if(distance < 1.0f && Time.time > LastShoot + 0.25f)
-        {
-            Shoot();
-            LastShoot = Time.time;
-        }*/
-    }/*
+            float distanceX = Mathf.Abs(player.transform.position.x - transform.position.x);
+
+            if (distanceX < 5.0f && Time.time > LastShoot + 0.25f)
+            {
+                Shoot();
+                LastShoot = Time.time;
+            }
+        }
+    }
     private void Shoot()
     {
         Vector3 direction;
         if (transform.localScale.x == 1) direction = Vector2.right;
         else direction = Vector2.left;
 
-        GameObject bullet = Instantiate(BulletPreFab, transform.position + direction * 0.2f, Quaternion.identity);
+        GameObject bullet = Instantiate(BulletPreFab, bulletPosicion.position + direction * 0.2f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
     }
-
+  
     public void Hit()
     {
         Health = Health - 1;
         if (Health == 0) Destroy(gameObject);
-    }*/
+    }
 }
 
    
