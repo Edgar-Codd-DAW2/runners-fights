@@ -49,13 +49,14 @@ public class BulletScript : MonoBehaviour
         if (player1 != null)
         {
             player1.Hit();
-            DestroyBullet();
+            
         }
 
-        /*if (turrets != null)
+        if (turrets != null)
         {
             turrets.Hit();
-        }*/
+        }
+        DestroyBullet();
     }
 
 
