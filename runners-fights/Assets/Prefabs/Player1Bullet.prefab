@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c14238f7c8acc046a4077b9960be5c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 0}
+  sound: {fileID: 8300000, guid: 5e5440cb8770ecb46bbca4ae2eee6483, type: 3}
+  hurtSound: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
   speed: 10
   LastShoot: 1
