@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public AudioClip sound;
+    public AudioClip hurtSound;
     public float speed;
 
     public float LastShoot;
@@ -14,6 +15,7 @@ public class BulletScript : MonoBehaviour
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(sound);
        
     }
         
@@ -49,13 +51,16 @@ public class BulletScript : MonoBehaviour
         if (player1 != null)
         {
             player1.Hit();
-            DestroyBullet();
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(hurtSound);
+
         }
 
-        /*if (turrets != null)
+        if (turrets != null)
         {
             turrets.Hit();
-        }*/
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(hurtSound);
+        }
+        DestroyBullet();
     }
 
 
