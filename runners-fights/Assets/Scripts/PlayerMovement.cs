@@ -25,8 +25,13 @@ public class PlayerMovement : MonoBehaviour
     public bool grounded;
     public float speed;
     public Transform checkGround;
+    public Transform arm;
     public Vector3 checkBoxSize;
+    public float attakRange;
     public LayerMask platformLayerMask;
+    public LayerMask enemyLayerMask;
+    public bool isMelee;
+    public float attackRate;
 
     private SpriteRenderer myRenderer;
     private Shader shaderGUItext;
@@ -77,9 +82,14 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-        if (Input.GetKey(KeyCode.J) && Time.time > lastShot + 0.25f && currentState != PlayerState.defend)
+        if (Input.GetKey(KeyCode.J) && Time.time > lastShot + attackRate && currentState != PlayerState.defend)
         {
-            Shoot();
+            if (isMelee)
+            {
+                Attack();
+            } else {
+                Shoot();
+            }
             lastShot = Time.time;
         }
 
@@ -94,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(checkGround.position, checkBoxSize);
+        Gizmos.DrawWireSphere(arm.position, attakRange);
     }
 
         private void Jump() 
@@ -102,6 +113,17 @@ public class PlayerMovement : MonoBehaviour
 
 
         //animator.SetFloat("speed", rigidbody2D.velocity.y);
+    }
+    private void Attack()
+    {
+        animator.SetTrigger("attack");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(arm.position, attakRange, enemyLayerMask);
+    
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("Hit");
+        }
     }
 
     private void Shoot()
