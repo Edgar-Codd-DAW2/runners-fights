@@ -187,6 +187,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3355712372185204039}
-  BulletPreFab: {fileID: 3568349810439411674, guid: 81956a5d00ad04e47a5cfa8d11c2004e,
+  BulletPreFab: {fileID: 3591060556484616385, guid: c3223a50a36a65d4f88a8ead0540d0b4,
     type: 3}
   bulletPosicion: {fileID: 6857671880607073571}
