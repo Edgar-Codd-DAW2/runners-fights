@@ -7,6 +7,7 @@ public class TurretScript : MonoBehaviour
     public GameObject player;
     public GameObject BulletPreFab;
     public Transform bulletPosicion;
+    public AudioClip hurtSound;
 
     private float LastShoot;
     private int Health = 3;
@@ -42,6 +43,7 @@ public class TurretScript : MonoBehaviour
   
     public void Hit()
     {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(hurtSound);
         Health = Health - 1;
         if (Health == 0) Destroy(gameObject);
     }

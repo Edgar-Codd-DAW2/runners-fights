@@ -6,6 +6,7 @@ using UnityEngine;
 public enum PlayerState
 {
     walk,
+    attack,
     defend
 }
 
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask enemyLayerMask;
     public bool isMelee;
     public float attackRate;
+    public AudioClip hurtSound;
 
     private SpriteRenderer myRenderer;
     private Shader shaderGUItext;
@@ -54,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
-        if (currentState != PlayerState.defend)
+        if (currentState != PlayerState.attack)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -77,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics2D.OverlapBox(checkGround.position, checkBoxSize, 0f, platformLayerMask);
 
 
-        if (Input.GetKeyDown(KeyCode.W)  && grounded && currentState != PlayerState.defend)
+        if (Input.GetKeyDown(KeyCode.W)  && grounded && currentState != PlayerState.attack)
         {
             Jump();
         }
@@ -86,14 +88,14 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isMelee)
             {
-                Attack();
+                StartCoroutine(AttackCo());
             } else {
                 Shoot();
             }
             lastShot = Time.time;
         }
 
-        if (Input.GetKey(KeyCode.K) && !animator.GetBool("running"))
+        if (Input.GetKey(KeyCode.K) && currentState != PlayerState.attack)
         {
             StartCoroutine(DefendCo());
         }
@@ -167,7 +169,37 @@ public class PlayerMovement : MonoBehaviour
 
     public void Hit()
     {
-        Health = Health - 1;
-        if (Health == 0) Destroy(gameObject);
+        if (currentState != PlayerState.defend)
+        {
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(hurtSound);
+            Health = Health - 1;
+            if (Health == 0) Destroy(gameObject);
+        }
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerMovement player1 = collision.GetComponent<PlayerMovement>();
+        TurretScript turrets = collision.GetComponent<TurretScript>();
+        Debug.Log(collision);
+        if (player1 != null)
+        {
+            player1.Hit();
+        }
+
+        if (turrets != null)
+        {
+            turrets.Hit();
+        }
+    }
+
+    private IEnumerator AttackCo()
+    {
+        animator.SetTrigger("attack");
+        currentState = PlayerState.attack;
+        yield return null;
+        yield return new WaitForSeconds(.5f);
+        currentState = PlayerState.walk;
     }
 }
