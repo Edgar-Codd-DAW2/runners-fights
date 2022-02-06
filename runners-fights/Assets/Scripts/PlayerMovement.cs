@@ -84,18 +84,29 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-        if (Input.GetKey(KeyCode.J) && Time.time > lastShot + attackRate && currentState != PlayerState.defend)
+        if (Input.GetKeyDown(KeyCode.J) && Time.time > lastShot + attackRate && currentState != PlayerState.defend)
         {
-            if (isMelee)
+            if (arm.GetComponent<Equip>().IsWeaponSet())
             {
-                StartCoroutine(AttackCo());
-            } else {
-                Shoot();
+                currentState = PlayerState.attack;
+                arm.GetComponent<Equip>().Attack(gameObject);
+                currentState = PlayerState.walk;
             }
-            lastShot = Time.time;
+            else 
+            {
+                if (isMelee)
+                {
+                    StartCoroutine(AttackCo());
+                }
+                else
+                {
+                    Shoot();
+                }
+                lastShot = Time.time;
+            }
         }
 
-        if (Input.GetKey(KeyCode.K) && currentState != PlayerState.attack)
+        if (Input.GetKeyDown(KeyCode.K) && currentState != PlayerState.attack)
         {
             StartCoroutine(DefendCo());
         }
@@ -116,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
 
         //animator.SetFloat("speed", rigidbody2D.velocity.y);
     }
-    private void Attack()
+    /*private void Attack()
     {
         animator.SetTrigger("attack");
 
@@ -126,6 +137,12 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Hit");
         }
+    }*/
+
+    public void PickUP(GameObject weapon)
+    {
+        //GameObject cpWeapon = Instantiate(weapon, arm.position, Quaternion.identity);
+        arm.GetComponent<Equip>().SetWeapon(weapon);
     }
 
     private void Shoot()
@@ -199,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetTrigger("attack");
         currentState = PlayerState.attack;
         yield return null;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         currentState = PlayerState.walk;
     }
 }
