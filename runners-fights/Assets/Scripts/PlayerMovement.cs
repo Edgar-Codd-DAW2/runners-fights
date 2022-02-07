@@ -199,7 +199,6 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerMovement player1 = collision.GetComponent<PlayerMovement>();
         TurretScript turrets = collision.GetComponent<TurretScript>();
-        Debug.Log(collision);
         if (player1 != null)
         {
             player1.Hit();

@@ -83,6 +83,7 @@ public class Weapon : MonoBehaviour
     private void PickUp()
     {
         player.GetComponent<PlayerMovement>().PickUP(gameObject);
+        transform.SetParent(player.transform.GetChild(1).transform);
         boxCollider2D.enabled = false;
         //Destroy(gameObject);
     }
@@ -91,6 +92,7 @@ public class Weapon : MonoBehaviour
     {
         boxCollider2D.enabled = true;
         player = null;
+        transform.parent = null;
         //Destroy(gameObject);
     }
 

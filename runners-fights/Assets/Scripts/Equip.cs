@@ -17,11 +17,11 @@ public class Equip : MonoBehaviour
     {
         if (IsWeaponSet())
         {
-            horizontal = Input.GetAxisRaw("Horizontal");
+            /*horizontal = Input.GetAxisRaw("Horizontal");
 
-            weapon.transform.position = transform.position;
             if (horizontal < 0.0f) weapon.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-            else if (horizontal > 0.0f) weapon.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            else if (horizontal > 0.0f) weapon.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);*/
+
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 weapon.GetComponent<Weapon>().Drop();
@@ -39,6 +39,7 @@ public class Equip : MonoBehaviour
     public void SetWeapon(GameObject cpWeapon)
     {
         weapon = cpWeapon;
+        weapon.transform.position = transform.position;
     }
 
     public void Attack(GameObject player)
