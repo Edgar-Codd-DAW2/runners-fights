@@ -56,7 +56,10 @@ public class BulletScript : MonoBehaviour
         {
             turrets.Hit();
         }
-        DestroyBullet();
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Item"))
+        {
+            DestroyBullet();
+        }
     }
 
 
