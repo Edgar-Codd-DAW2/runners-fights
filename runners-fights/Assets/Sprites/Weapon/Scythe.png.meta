@@ -94,9 +94,9 @@ TextureImporter:
     physicsShape: []
     bones:
     - name: bone_1
-      position: {x: 16.374308, y: 8.39163, z: 0}
-      rotation: {x: 0, y: 0, z: 0.706319, w: 0.7078937}
-      length: 45.617207
+      position: {x: 16.374306, y: 15.524355, z: 0}
+      rotation: {x: 0, y: 0, z: 0.70617586, w: 0.7080365}
+      length: 38.48463
       parentId: -1
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
