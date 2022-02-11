@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
     public bool isMelee;
     public GameObject bulletPreFab;
     public Transform bulletPosicion;
-
+    private float timeToDestroy;
 
     // Use this for initialization
     private void Start()
@@ -31,6 +31,7 @@ public class Weapon : MonoBehaviour
 
         boxCollider2D = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        timeToDestroy = 10f;
     }
 
     // Update is called once per frame
@@ -39,6 +40,18 @@ public class Weapon : MonoBehaviour
         if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
         {
             PickUp();
+        }
+
+        if (transform.parent == null)
+        {
+            if (timeToDestroy > 0)
+            {
+                timeToDestroy -= Time.deltaTime;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -127,7 +140,7 @@ public class Weapon : MonoBehaviour
         boxCollider2D.enabled = true;
         player = null;
         transform.parent = null;
-        //Destroy(gameObject);
+        timeToDestroy = 5f;
     }
 
     private IEnumerator AttackCo()
