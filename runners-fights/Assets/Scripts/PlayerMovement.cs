@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public float attackRate;
     public AudioClip hurtSound;
     public Text healthText;
+    public GameObject gameOverUI;
 
     private SpriteRenderer myRenderer;
     private Shader shaderGUItext;
@@ -193,7 +194,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Camera.main.GetComponent<AudioSource>().PlayOneShot(hurtSound);
             Health = Health - 1;
-            if (Health == 0) Destroy(gameObject);
+
+            if (Health <= 0)
+            {
+                GetComponent<Renderer>().enabled = false;
+                gameOverUI.SetActive(true);
+                Time.timeScale = 0f;
+            }
         }
         
     }
