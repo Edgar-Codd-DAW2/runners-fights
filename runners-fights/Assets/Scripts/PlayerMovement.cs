@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public enum PlayerState
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isMelee;
     public float attackRate;
     public AudioClip hurtSound;
+    public Text healthText;
 
     private SpriteRenderer myRenderer;
     private Shader shaderGUItext;
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
+        healthText.text = Health.ToString();
         if (currentState != PlayerState.attack)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
