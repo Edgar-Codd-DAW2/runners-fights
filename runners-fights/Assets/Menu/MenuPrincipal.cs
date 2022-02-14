@@ -24,15 +24,25 @@ public class MenuPrincipal : MonoBehaviour
         //Debug.Log("Clickas A Primer Mapa");
         SceneManager.LoadScene("MapaTutorial");
     }
-
-    /*public void EmpezarMultiplayer()
+    public void PrimerNivel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        //Debug.Log("Clickas A Primer Mapa");
+        SceneManager.LoadScene("Map1Lvl1");
     }
-    public void Options()
+    public void SegundoNivel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
-    }*/
+        //Debug.Log("Clickas A Primer Mapa");
+        SceneManager.LoadScene("mapa roger 1");
+    }
+    public void EmpezarMultiplayer()
+    {
+        SceneManager.LoadScene("menuLevelsMultijugador");
+    }
+    public void Multiplayer()
+    {
+        SceneManager.LoadScene("Stadiummulti1");
+    }
+
     public void CerrarJuego()
     {
         Application.Quit();
