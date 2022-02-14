@@ -15,7 +15,7 @@ public class ladderMovement : MonoBehaviour
     void Update()
     {
         vertical = Input.GetAxis("Vertical");
-
+       
         if (isLadder && Mathf.Abs(vertical) > 0f)
         {
             isClimbing = true;
@@ -28,6 +28,7 @@ public class ladderMovement : MonoBehaviour
         {
             rb.gravityScale = 0f;
             rb.velocity = new Vector2(rb.velocity.x, vertical * speed);
+
         }
         else
         {
