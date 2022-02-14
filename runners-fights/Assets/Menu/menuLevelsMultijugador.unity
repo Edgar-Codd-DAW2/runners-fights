@@ -1669,7 +1669,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1737518271}
         m_TargetAssemblyTypeName: MenuPrincipal, Assembly-CSharp
-        m_MethodName: EmpezarTutorial
+        m_MethodName: Multiplayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
