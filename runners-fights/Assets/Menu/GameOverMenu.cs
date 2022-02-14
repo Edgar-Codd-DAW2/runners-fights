@@ -20,7 +20,7 @@ public class GameOverMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Menu");
     }
 
     public void RestartLevel()
