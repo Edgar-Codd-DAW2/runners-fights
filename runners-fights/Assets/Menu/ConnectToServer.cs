@@ -23,6 +23,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        SceneManager.LoadScene("Map1Lvl1");
+        SceneManager.LoadScene("Lobby");
     }
 }

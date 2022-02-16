@@ -72,6 +72,12 @@ EditorBuildSettings:
     path: Assets/Menu/menuLevels.unity
     guid: 07c03e83f21cdd3419e775836701d63d
   - enabled: 1
+    path: Assets/Menu/menuLevelsMultijugador.unity
+    guid: ae54bfb1975a38c4884b6b3242d8b002
+  - enabled: 1
+    path: Assets/Menu/Lobby.unity
+    guid: 38617bef0f7222242bcb6938d7bde14c
+  - enabled: 1
     path: Assets/Scenes/MapaTutorial.unity
     guid: ee1bbd5b577076044904c15cc1cfbc90
   - enabled: 1
@@ -80,9 +86,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/mapa roger 1.unity
     guid: bf441780903960e4180d759dd4d3e016
-  - enabled: 1
-    path: Assets/Menu/menuLevelsMultijugador.unity
-    guid: ae54bfb1975a38c4884b6b3242d8b002
   - enabled: 1
     path: Assets/Scenes/Stadiummulti1.unity
     guid: 6c13c665ef237f448b08ecffd574efc4
