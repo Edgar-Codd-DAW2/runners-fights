@@ -28,7 +28,6 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     public void ApplyLocalChanges()
     {
-        Debug.Log(highlightColor);
         leftArrowButton.SetActive(true);
         rightArrowButton.SetActive(true);
     }
