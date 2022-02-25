@@ -64,8 +64,16 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontal = Input.GetAxisRaw("Horizontal");
 
-            if (horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-            else if (horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            if (horizontal < 0.0f)
+            { 
+                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                transform.GetChild(2).transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            }
+            else if (horizontal > 0.0f)
+            {
+                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                transform.GetChild(2).transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
 
             animator.SetBool("running", horizontal != 0.0f);
         }

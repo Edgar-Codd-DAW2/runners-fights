@@ -2541,6 +2541,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1163664279978192409, guid: 245cdb1dbee74da4998a29383c556afd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 245cdb1dbee74da4998a29383c556afd, type: 3}
 --- !u!1 &566897915 stripped
@@ -2615,6 +2620,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &583222732 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8273741720687440604, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
+    type: 3}
+  m_PrefabInstance: {fileID: 309670955259170184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &624922384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2633,7 +2650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &624922385
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3373,18 +3390,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cb3efa08f7d60b4bb7d127991c41ab5, type: 3}
---- !u!114 &1381230315 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1163664279978192411, guid: 245cdb1dbee74da4998a29383c556afd,
-    type: 3}
-  m_PrefabInstance: {fileID: 507348272}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2066847823
 GameObject:
   m_ObjectHideFlags: 0
@@ -16865,6 +16870,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 309670954879934944, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 309670954879934944, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
+        type: 3}
       propertyPath: gameOverUI
       value: 
       objectReference: {fileID: 566897915}
@@ -16872,7 +16882,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthText
       value: 
-      objectReference: {fileID: 1381230315}
+      objectReference: {fileID: 583222732}
     - target: {fileID: 309670954879934955, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
         type: 3}
       propertyPath: m_Name
