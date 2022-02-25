@@ -12,6 +12,11 @@ public class TurretScript : MonoBehaviour
     private float LastShoot;
     private int Health = 3;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
+    }
+
     private void Update()
     {
         if (player == null) return;
