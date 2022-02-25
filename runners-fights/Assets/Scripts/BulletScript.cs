@@ -14,7 +14,7 @@ public class BulletScript : MonoBehaviour
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(sound);
+        //Camera.main.GetComponent<AudioSource>().PlayOneShot(sound);
        
     }
         
