@@ -19,6 +19,12 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     Player player;
 
+    private void Awake()
+    {
+        playerProperties["playeAvatar"] = 0;
+        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+    }
+
     public void setPlayerInfo(Player _player)
     {
         playerName.text = _player.NickName;
