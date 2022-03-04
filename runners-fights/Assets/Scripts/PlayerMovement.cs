@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Photon.Pun;
 
 public enum PlayerState
 {
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private Shader shaderGUItext;
     private Shader shaderSpritesDefault;
 
-
+    PhotonView view;
    
     public bool usingLadder = false;
 
@@ -55,74 +55,78 @@ public class PlayerMovement : MonoBehaviour
         myRenderer = gameObject.GetComponent<SpriteRenderer>();
         shaderGUItext = Shader.Find("GUI/Text Shader");
         shaderSpritesDefault = Shader.Find("Sprites/Default");
+
+        view = GetComponent<PhotonView>();
     }
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
-        healthText.text = Health.ToString();
-        if (currentState != PlayerState.attack)
+        if (view.IsMine)
         {
-            horizontal = Input.GetAxisRaw("Horizontal");
-
-            if (horizontal < 0.0f)
-            { 
-                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-                transform.GetChild(2).transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-            }
-            else if (horizontal > 0.0f)
+            healthText.text = Health.ToString();
+            if (currentState != PlayerState.attack)
             {
-                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                transform.GetChild(2).transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            }
+                horizontal = Input.GetAxisRaw("Horizontal");
 
-            animator.SetBool("running", horizontal != 0.0f);
-        }
-
-        /*Debug.DrawRay(transform.position, Vector3.down * 2.2f, Color.red);
-        if (Physics2D.Raycast(transform.position, Vector3.down, 2.2f)) 
-        {
-            grounded = true;
-        } else {
-       
-            grounded = false;
-        }*/
-
-
-        grounded = Physics2D.OverlapBox(checkGround.position, checkBoxSize, 0f, platformLayerMask);
-
-
-        if (Input.GetKeyDown(KeyCode.W)  && grounded && currentState != PlayerState.attack)
-        {
-            Jump();
-        }
-
-        if (Input.GetKeyDown(KeyCode.J) && Time.time > lastShot + attackRate && currentState != PlayerState.defend)
-        {
-            if (arm.GetComponent<Equip>().IsWeaponSet())
-            {
-                currentState = PlayerState.attack;
-                arm.GetComponent<Equip>().Attack(gameObject);
-                currentState = PlayerState.walk;
-            }
-            else 
-            {
-                if (isMelee)
+                if (horizontal < 0.0f)
                 {
-                    StartCoroutine(AttackCo());
+                    transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                    transform.GetChild(2).transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                }
+                else if (horizontal > 0.0f)
+                {
+                    transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    transform.GetChild(2).transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                }
+
+                animator.SetBool("running", horizontal != 0.0f);
+            }
+
+            /*Debug.DrawRay(transform.position, Vector3.down * 2.2f, Color.red);
+            if (Physics2D.Raycast(transform.position, Vector3.down, 2.2f)) 
+            {
+                grounded = true;
+            } else {
+
+                grounded = false;
+            }*/
+
+
+            grounded = Physics2D.OverlapBox(checkGround.position, checkBoxSize, 0f, platformLayerMask);
+
+
+            if (Input.GetKeyDown(KeyCode.W) && grounded && currentState != PlayerState.attack)
+            {
+                Jump();
+            }
+
+            if (Input.GetKeyDown(KeyCode.J) && Time.time > lastShot + attackRate && currentState != PlayerState.defend)
+            {
+                if (arm.GetComponent<Equip>().IsWeaponSet())
+                {
+                    currentState = PlayerState.attack;
+                    arm.GetComponent<Equip>().Attack(gameObject);
+                    currentState = PlayerState.walk;
                 }
                 else
                 {
-                    Shoot();
+                    if (isMelee)
+                    {
+                        StartCoroutine(AttackCo());
+                    }
+                    else
+                    {
+                        Shoot();
+                    }
+                    lastShot = Time.time;
                 }
-                lastShot = Time.time;
+            }
+
+            if (Input.GetKeyDown(KeyCode.K) && currentState != PlayerState.attack)
+            {
+                StartCoroutine(DefendCo());
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.K) && currentState != PlayerState.attack)
-        {
-            StartCoroutine(DefendCo());
-        }
-
     }
 
     private void OnDrawGizmosSelected()
