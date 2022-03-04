@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
    
     public bool usingLadder = false;
 
-    private void Awake()
+    void Awake()
     {
         if (view.IsMine)
         {

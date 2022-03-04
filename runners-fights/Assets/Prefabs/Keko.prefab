@@ -643,6 +643,7 @@ MonoBehaviour:
   hurtSound: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
   healthText: {fileID: 6502139635995530517}
   gameOverUI: {fileID: 0}
+  playerCamera: {fileID: 6502139636730012290}
   usingLadder: 0
 --- !u!95 &6502139637302142132
 Animator:
