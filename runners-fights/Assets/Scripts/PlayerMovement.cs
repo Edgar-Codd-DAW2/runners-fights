@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip hurtSound;
     public Text healthText;
     public GameObject gameOverUI;
+    public GameObject playerCamera;
 
     private SpriteRenderer myRenderer;
     private Shader shaderGUItext;
@@ -45,6 +46,14 @@ public class PlayerMovement : MonoBehaviour
     PhotonView view;
    
     public bool usingLadder = false;
+
+    private void Awake()
+    {
+        if (view.IsMine)
+        {
+            playerCamera.SetActive(true);
+        }
+    }
 
     void Start()
     {

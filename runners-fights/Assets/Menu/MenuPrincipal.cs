@@ -36,7 +36,7 @@ public class MenuPrincipal : MonoBehaviour
     }
     public void EmpezarMultiplayer()
     {
-        SceneManager.LoadScene("CreateRoomMenu");
+        SceneManager.LoadScene("Lobby");
     }
     public void Multiplayer()
     {
