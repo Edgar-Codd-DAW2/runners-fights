@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+        view = GetComponent<PhotonView>();
         if (view.IsMine)
         {
             playerCamera.SetActive(true);
