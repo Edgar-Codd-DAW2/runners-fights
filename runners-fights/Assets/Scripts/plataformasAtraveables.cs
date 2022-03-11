@@ -14,12 +14,12 @@ public class plataformasAtraveables : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        if (Input.GetKeyUp(KeyCode.S))
         {
             tiempoEspera = 0.5f;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.S))
         {
             if(tiempoEspera <= 0)
             {
@@ -32,7 +32,7 @@ public class plataformasAtraveables : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
             effector.rotationalOffset = 0;
         }
