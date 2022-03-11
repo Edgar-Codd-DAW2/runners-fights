@@ -403,6 +403,7 @@ MonoBehaviour:
   attackRate: 0.25
   hurtSound: {fileID: 0}
   healthText: {fileID: 8273741720687440604}
+  playerName: {fileID: 6533169189501758414}
   gameOverUI: {fileID: 0}
   playerCamera: {fileID: 1135482056}
   usingLadder: 0
@@ -495,9 +496,9 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 2
+    InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 1
+    InterpolateLerpSpeed: 4
     ExtrapolateOption: 0
     ExtrapolateSpeed: 1
     ExtrapolateIncludingRoundTripTime: 1
@@ -508,7 +509,7 @@ MonoBehaviour:
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0

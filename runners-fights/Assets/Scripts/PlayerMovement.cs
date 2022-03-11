@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public float attackRate;
     public AudioClip hurtSound;
     public Text healthText;
+    public Text playerName;
     public GameObject gameOverUI;
     public GameObject playerCamera;
 
@@ -53,6 +54,10 @@ public class PlayerMovement : MonoBehaviour
         if (view.IsMine)
         {
             playerCamera.SetActive(true);
+            playerName.text = PhotonNetwork.NickName;
+        } else
+        {
+            playerName.text = view.Owner.NickName;
         }
     }
 
@@ -65,15 +70,13 @@ public class PlayerMovement : MonoBehaviour
         myRenderer = gameObject.GetComponent<SpriteRenderer>();
         shaderGUItext = Shader.Find("GUI/Text Shader");
         shaderSpritesDefault = Shader.Find("Sprites/Default");
-
-        view = GetComponent<PhotonView>();
     }
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
         if (view.IsMine)
         {
-            healthText.text = Health.ToString();
+            view.RPC("playerHealthText", RpcTarget.AllBuffered);
             if (currentState != PlayerState.attack)
             {
                 horizontal = Input.GetAxisRaw("Horizontal");
@@ -81,13 +84,13 @@ public class PlayerMovement : MonoBehaviour
                 if (horizontal < 0.0f)
                 {
                     transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-                    transform.GetChild(2).transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
                 }
                 else if (horizontal > 0.0f)
                 {
                     transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                    transform.GetChild(2).transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 }
+
+                view.RPC("playerPosition", RpcTarget.AllBuffered);
 
                 animator.SetBool("running", horizontal != 0.0f);
             }
@@ -177,8 +180,11 @@ public class PlayerMovement : MonoBehaviour
         if (transform.localScale.x == 1.0f) direction = Vector2.right;
         else direction = Vector2.left;
 
-        GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
-        bullet.GetComponent<BulletScript>().SetDirection(direction);
+        /*GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
+        bullet.GetComponent<BulletScript>().SetDirection(direction);*/
+
+        GameObject bullet = PhotonNetwork.Instantiate(bulletPreFab.name, transform.position + direction * 0.5f, Quaternion.identity);
+        //bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.AllBuffered);
     }
 
     private void FixedUpdate()
@@ -249,5 +255,19 @@ public class PlayerMovement : MonoBehaviour
         yield return null;
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         currentState = PlayerState.walk;
+    }
+
+    [PunRPC]
+    private void playerPosition()
+    {
+
+        transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+    }
+
+    [PunRPC]
+    private void playerHealthText()
+    {
+
+        healthText.text = Health.ToString();
     }
 }
