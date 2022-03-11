@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  bulletPreFab: {fileID: 3591060556484616385, guid: c3223a50a36a65d4f88a8ead0540d0b4,
+  bulletPreFab: {fileID: 3591060556484616385, guid: 45e161e63345c8640ae9ce50621d5af9,
     type: 3}
   jumpForce: 800
   animator: {fileID: 0}
