@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3591060556484616414}
   - component: {fileID: 3591060556484616411}
   - component: {fileID: 3591060556484616410}
-  - component: {fileID: 3687328515441223179}
   - component: {fileID: 3591060556484616413}
+  - component: {fileID: 3687328515441223179}
   - component: {fileID: 3194398292336833922}
   m_Layer: 0
   m_Name: Player1Bullet
@@ -144,6 +144,21 @@ CircleCollider2D:
   m_Offset: {x: 0.2, y: 0}
   serializedVersion: 2
   m_Radius: 0.1655398
+--- !u!114 &3591060556484616413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591060556484616385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c14238f7c8acc046a4077b9960be5c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 5e5440cb8770ecb46bbca4ae2eee6483, type: 3}
+  speed: 10
+  LastShoot: 1
 --- !u!114 &3687328515441223179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,25 +179,9 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3194398292336833922}
-  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3591060556484616413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3591060556484616385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c14238f7c8acc046a4077b9960be5c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 5e5440cb8770ecb46bbca4ae2eee6483, type: 3}
-  speed: 10
-  LastShoot: 1
 --- !u!114 &3194398292336833922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,9 +198,9 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 2
+    InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 1
+    InterpolateLerpSpeed: 4
     ExtrapolateOption: 0
     ExtrapolateSpeed: 1
     ExtrapolateIncludingRoundTripTime: 1
@@ -212,7 +211,7 @@ MonoBehaviour:
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0

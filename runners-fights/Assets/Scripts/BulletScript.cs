@@ -61,6 +61,4 @@ public class BulletScript : MonoBehaviour
             DestroyBullet();
         }
     }
-
-
 }
