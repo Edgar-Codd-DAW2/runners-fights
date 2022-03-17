@@ -28769,6 +28769,11 @@ PrefabInstance:
       propertyPath: gameOverUI
       value: 
       objectReference: {fileID: 699065899}
+    - target: {fileID: 6502139637302142133, guid: b020823bc6aa9154694239d3d40fdb2a,
+        type: 3}
+      propertyPath: playerName
+      value: 
+      objectReference: {fileID: 6502139636159945504}
     - target: {fileID: 6502139637302142136, guid: b020823bc6aa9154694239d3d40fdb2a,
         type: 3}
       propertyPath: m_RootOrder
@@ -28831,6 +28836,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b020823bc6aa9154694239d3d40fdb2a, type: 3}
+--- !u!114 &6502139636159945504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6502139637650771349, guid: b020823bc6aa9154694239d3d40fdb2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6502139636159945503}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7799753934169429065
 PrefabInstance:
   m_ObjectHideFlags: 0

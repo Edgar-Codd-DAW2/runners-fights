@@ -90,7 +90,13 @@ public class PlayerMovement : MonoBehaviour
                     transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 }
 
-                view.RPC("playerPosition", RpcTarget.AllBuffered);
+                if (PhotonNetwork.CurrentRoom != null)
+                {
+                    view.RPC("playerPosition", RpcTarget.AllBuffered);
+                } else
+                {
+                    playerPosition();
+                }
 
                 animator.SetBool("running", horizontal != 0.0f);
             }
@@ -182,8 +188,16 @@ public class PlayerMovement : MonoBehaviour
 
         /*GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);*/
+        GameObject bullet = null;
 
-        GameObject bullet = PhotonNetwork.Instantiate(bulletPreFab.name, transform.position + direction * 0.5f, Quaternion.identity);
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            bullet = PhotonNetwork.Instantiate(bulletPreFab.name, transform.position + direction * 0.5f, Quaternion.identity);
+        } else
+        {
+            bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
+        }
+        bullet.GetComponent<BulletScript>().SetDirection(direction);
         //bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.AllBuffered);
     }
 
