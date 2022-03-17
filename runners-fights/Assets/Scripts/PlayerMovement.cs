@@ -234,7 +234,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (currentState != PlayerState.defend)
         {
-            //Camera.main.GetComponent<AudioSource>().PlayOneShot(hurtSound);
+            playerCamera.GetComponent<AudioSource>().PlayOneShot(hurtSound);
             Health = Health - 1;
 
             if (Health <= 0)
