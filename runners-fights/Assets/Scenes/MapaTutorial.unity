@@ -2165,6 +2165,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 274417811376221334, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
+        type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e5440cb8770ecb46bbca4ae2eee6483, type: 3}
     - target: {fileID: 274417811376221355, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
         type: 3}
       propertyPath: m_RootOrder
@@ -2270,6 +2275,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 274417811376221334, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
+        type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e5440cb8770ecb46bbca4ae2eee6483, type: 3}
     - target: {fileID: 274417811376221355, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
         type: 3}
       propertyPath: m_RootOrder
@@ -2390,6 +2400,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: turret-1_0 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 274417811376221334, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
+        type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e5440cb8770ecb46bbca4ae2eee6483, type: 3}
     - target: {fileID: 274417811376221355, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
         type: 3}
       propertyPath: m_RootOrder
@@ -3645,6 +3660,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 274417811376221334, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
+        type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e5440cb8770ecb46bbca4ae2eee6483, type: 3}
     - target: {fileID: 274417811376221355, guid: 1cb3efa08f7d60b4bb7d127991c41ab5,
         type: 3}
       propertyPath: m_RootOrder
@@ -17613,6 +17633,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135482058, guid: 91f05ed86bd21a84eb24bbd7af452bd5, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 65e00fd61c888164db9962202cc08eb0, type: 3}
+    - target: {fileID: 309670954879934944, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
+        type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
     - target: {fileID: 309670954879934944, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
         type: 3}
       propertyPath: m_Enabled
@@ -17646,7 +17675,7 @@ PrefabInstance:
     - target: {fileID: 309670954879934959, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8365
+      value: 0.97945786
       objectReference: {fileID: 0}
     - target: {fileID: 309670954879934959, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
         type: 3}
@@ -17656,7 +17685,7 @@ PrefabInstance:
     - target: {fileID: 309670954879934959, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.44
+      value: 18.1406
       objectReference: {fileID: 0}
     - target: {fileID: 309670954879934959, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
         type: 3}
