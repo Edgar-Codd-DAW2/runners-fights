@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.009243, y: 0.85}
+  m_AnchoredPosition: {x: 0, y: 1.22}
   m_SizeDelta: {x: 99.981514, y: 23.3386}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6502139635995530516
@@ -103,7 +103,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6502139636683533229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: -0.6, z: 0}
+  m_LocalPosition: {x: -0.07, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6502139637302142136}
@@ -430,7 +430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6502139637003696654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.381, y: -0.142, z: 0}
+  m_LocalPosition: {x: 0.757, y: -0.294, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6502139637302142136}
@@ -461,12 +461,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.2049377, y: 0.38957095}
-      - {x: -0.11407137, y: 0.40112543}
-      - {x: -0.09552199, y: 0.014332801}
-      - {x: -0.12199396, y: -0.3717438}
-      - {x: 0.18853629, y: -0.36223793}
-      - {x: 0.19058156, y: 0.21395749}
+    - - {x: 0.25287837, y: 0.7011851}
+      - {x: -0.24191314, y: 0.4570561}
+      - {x: -0.25258458, y: 0.19920766}
+      - {x: -0.23934397, y: -0.03360784}
+      - {x: -0.25915825, y: -0.07327452}
+      - {x: -0.2578258, y: -0.4915954}
+      - {x: -0.2160505, y: -0.5130575}
+      - {x: 0.25245714, y: -0.7537533}
+      - {x: 0.25450236, y: 0.21395749}
 --- !u!114 &6502139637003696651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,8 +588,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.026098967, y: -0.08140731}
-  m_Size: {x: 0.4427142, y: 0.7908764}
+  m_Offset: {x: -0.058059394, y: -0.15101635}
+  m_Size: {x: 0.8901602, y: 1.5717382}
   m_Direction: 0
 --- !u!50 &6502139637302142134
 Rigidbody2D:
@@ -630,7 +633,7 @@ MonoBehaviour:
   speed: 7
   checkGround: {fileID: 6502139636683533228}
   arm: {fileID: 6502139637003696653}
-  checkBoxSize: {x: 0.6, y: 0.2, z: 0}
+  checkBoxSize: {x: 1.3, y: 0.2, z: 0}
   attakRange: 0.25
   platformLayerMask:
     serializedVersion: 2
@@ -642,6 +645,7 @@ MonoBehaviour:
   attackRate: 0.5
   hurtSound: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
   healthText: {fileID: 6502139635995530517}
+  playerName: {fileID: 0}
   gameOverUI: {fileID: 0}
   playerCamera: {fileID: 6502139636730012290}
   usingLadder: 0
@@ -711,7 +715,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000023842, y: -0.96}
+  m_AnchoredPosition: {x: 0, y: -1.4}
   m_SizeDelta: {x: 100, y: 23.3386}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6502139637650771348
