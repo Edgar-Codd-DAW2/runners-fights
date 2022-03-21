@@ -76,7 +76,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (view.IsMine)
         {
-            view.RPC("playerHealthText", RpcTarget.AllBuffered);
+            if (PhotonNetwork.InRoom)
+            {
+                view.RPC("playerHealthText", RpcTarget.AllBuffered);
+            } else
+            {
+                playerHealthText();
+            }
             if (currentState != PlayerState.attack)
             {
                 horizontal = Input.GetAxisRaw("Horizontal");
@@ -90,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
                     transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 }
 
-                if (PhotonNetwork.CurrentRoom != null)
+                if (PhotonNetwork.InRoom)
                 {
                     view.RPC("playerPosition", RpcTarget.AllBuffered);
                 } else
