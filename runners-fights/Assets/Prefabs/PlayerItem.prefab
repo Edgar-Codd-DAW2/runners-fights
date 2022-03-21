@@ -677,4 +677,4 @@ MonoBehaviour:
   playeAvatar: {fileID: 1765457930788075314}
   avatars:
   - {fileID: 21300000, guid: d4bb2922337b1a547b27cabbd3a41e5a, type: 3}
-  - {fileID: 3724249428552016925, guid: 7322d83bb65d2f1498c4fa5c40ecca30, type: 3}
+  - {fileID: 3724249428552016925, guid: 59a36276f4e72434880270eb8d348db1, type: 3}
