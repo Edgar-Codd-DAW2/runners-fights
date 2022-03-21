@@ -6,6 +6,7 @@ TagManager:
   tags:
   - escalera
   - Ladder
+  - Teleporter
   layers:
   - Default
   - TransparentFX
