@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isMelee;
     public float attackRate;
     public AudioClip hurtSound;
-    public Text healthText;
+    //public Text healthText;
     public Text playerName;
     public GameObject gameOverUI;
     public GameObject playerCamera;
@@ -288,6 +288,6 @@ public class PlayerMovement : MonoBehaviour
     private void playerHealthText()
     {
 
-        healthText.text = Health.ToString();
+        //healthText.text = Health.ToString();
     }
 }
