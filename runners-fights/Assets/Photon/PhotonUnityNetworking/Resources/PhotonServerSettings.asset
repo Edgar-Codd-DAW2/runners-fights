@@ -42,6 +42,8 @@ MonoBehaviour:
   - playerFlip
   - playerPosition
   - playerHealthText
+  - Hit
+  - reduceHealth
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

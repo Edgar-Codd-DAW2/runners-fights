@@ -17988,6 +17988,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 65e00fd61c888164db9962202cc08eb0, type: 3}
     - target: {fileID: 309670954879934944, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
         type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 309670955259170189}
+    - target: {fileID: 309670954879934944, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
+        type: 3}
       propertyPath: hurtSound
       value: 
       objectReference: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
@@ -18148,6 +18153,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &309670955259170189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5414795821440207054, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
+    type: 3}
+  m_PrefabInstance: {fileID: 309670955259170184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1563965039147007117

@@ -399,8 +399,10 @@ MonoBehaviour:
     m_Bits: 0
   isMelee: 0
   attackRate: 0.25
+  damage: 1
   hurtSound: {fileID: 0}
-  healthText: {fileID: 645484794282676339}
+  health: 5
+  healthBar: {fileID: 0}
   playerName: {fileID: 645484795816282355}
   gameOverUI: {fileID: 0}
   playerCamera: {fileID: 1135482056}
@@ -635,18 +637,6 @@ RectTransform:
 --- !u!114 &645484795816282355 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8036714207002770606, guid: 3cba60790444d7840b26236d7f0ea14c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7457149534070092893}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &645484794282676339 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8036714207444804654, guid: 3cba60790444d7840b26236d7f0ea14c,
     type: 3}
   m_PrefabInstance: {fileID: 7457149534070092893}
   m_PrefabAsset: {fileID: 0}

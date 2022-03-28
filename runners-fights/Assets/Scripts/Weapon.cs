@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour
     public bool isMelee;
     public GameObject bulletPreFab;
     public Transform bulletPosicion;
+    public float damage;
     private float timeToDestroy;
 
     // Use this for initialization
@@ -66,13 +67,13 @@ public class Weapon : MonoBehaviour
                 if (collision.gameObject != player)
                 {
                     Debug.Log(player);
-                    player1.Hit();
+                    player1.Hit(damage);
                 }
             }
 
             if (turrets != null)
             {
-                turrets.Hit();
+                turrets.Hit(damage);
             }
         }
         else 
@@ -119,6 +120,8 @@ public class Weapon : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletPreFab, bulletPosicion.transform.position + direction * 0.5f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
+        bullet.GetComponent<BulletScript>().SetDamage(damage);
+
     }
 
     private void PickUp()

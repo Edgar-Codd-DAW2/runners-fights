@@ -6,7 +6,7 @@ public class BulletScript : MonoBehaviour
 {
     public AudioClip sound;
     public float speed;
-
+    public float damage;
     public float LastShoot;
     private Rigidbody2D rigidbody2D;
     private Vector2 direction;
@@ -42,6 +42,11 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void SetDamage(float amount)
+    {
+        damage = amount;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerMovement player1 = collision.GetComponent<PlayerMovement>();
@@ -49,12 +54,12 @@ public class BulletScript : MonoBehaviour
 
         if (player1 != null)
         {
-            player1.Hit();
+            player1.Hit(damage);
         }
 
         if (turrets != null)
         {
-            turrets.Hit();
+            turrets.Hit(damage);
         }
         if (collision.gameObject.layer != LayerMask.NameToLayer("Item") && !collision.gameObject.CompareTag("Ladder"))
         {

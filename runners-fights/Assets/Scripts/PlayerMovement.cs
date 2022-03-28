@@ -34,8 +34,10 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask enemyLayerMask;
     public bool isMelee;
     public float attackRate;
+    public float damage;
     public AudioClip hurtSound;
-    //public Text healthText;
+    public float health;
+    public Image healthBar;
     public Text playerName;
     public GameObject gameOverUI;
     public GameObject playerCamera;
@@ -78,10 +80,10 @@ public class PlayerMovement : MonoBehaviour
         {
             if (PhotonNetwork.InRoom)
             {
-                view.RPC("playerHealthText", RpcTarget.AllBuffered);
+                //view.RPC("playerHealthText", RpcTarget.AllBuffered);
             } else
             {
-                playerHealthText();
+                //playerHealthText();
             }
             if (currentState != PlayerState.attack)
             {
@@ -204,6 +206,7 @@ public class PlayerMovement : MonoBehaviour
             bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
         }
         bullet.GetComponent<BulletScript>().SetDirection(direction);
+        bullet.GetComponent<BulletScript>().SetDamage(damage);
         //bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.AllBuffered);
     }
 
@@ -236,14 +239,14 @@ public class PlayerMovement : MonoBehaviour
         myRenderer.color = Color.white;
     }
 
-    public void Hit()
+    [PunRPC]
+    public void Hit(float amount)
     {
         if (currentState != PlayerState.defend)
         {
-            playerCamera.GetComponent<AudioSource>().PlayOneShot(hurtSound);
-            Health = Health - 1;
+            healthBar.fillAmount -= amount / health / 10;
 
-            if (Health <= 0)
+            if (healthBar.fillAmount <= 0)
             {
                 GetComponent<Renderer>().enabled = false;
                 gameOverUI.SetActive(true);
@@ -259,12 +262,12 @@ public class PlayerMovement : MonoBehaviour
         TurretScript turrets = collision.GetComponent<TurretScript>();
         if (player1 != null)
         {
-            player1.Hit();
+            player1.Hit(damage);
         }
 
         if (turrets != null)
         {
-            turrets.Hit();
+            turrets.Hit(damage);
         }
     }
 
@@ -285,9 +288,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     [PunRPC]
-    private void playerHealthText()
+    public void reduceHealth(float amount)
     {
-
-        //healthText.text = Health.ToString();
+        if (view.IsMine)
+        {
+            healthBar.fillAmount -= amount;
+        }
+        else
+        {
+            healthBar.fillAmount -= amount;
+        }
     }
 }

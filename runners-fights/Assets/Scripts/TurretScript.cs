@@ -8,9 +8,10 @@ public class TurretScript : MonoBehaviour
     public GameObject BulletPreFab;
     public Transform bulletPosicion;
     public AudioClip hurtSound;
-    public Camera camera;
     private float LastShoot;
-    private int Health = 3;
+    public float health;
+    public float damage;
+
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class TurretScript : MonoBehaviour
 
             float distanceX = Mathf.Abs(player.transform.position.x - transform.position.x);
 
-            if (distanceX < 5.0f && Time.time > LastShoot + 0.25f)
+            if (distanceX < 5.0f && Time.time > LastShoot + 1.25f)
             {
                 Shoot();
                 LastShoot = Time.time;
@@ -44,13 +45,14 @@ public class TurretScript : MonoBehaviour
 
         GameObject bullet = Instantiate(BulletPreFab, bulletPosicion.position + direction * 0.2f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
+        bullet.GetComponent<BulletScript>().SetDamage(damage);
     }
   
-    public void Hit()
+    public void Hit(float amount)
     {
         //Camera.main.GetComponent<AudioSource>().PlayOneShot(hurtSound);
-        Health = Health - 1;
-        if (Health == 0) Destroy(gameObject);
+        health -= amount;
+        if (health <= 0) Destroy(gameObject);
     }
 }
 

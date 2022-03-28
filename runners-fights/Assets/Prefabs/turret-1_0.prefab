@@ -161,6 +161,8 @@ MonoBehaviour:
     type: 3}
   bulletPosicion: {fileID: 274417812317306644}
   hurtSound: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
+  health: 6
+  damage: 20
 --- !u!1 &274417812317306643
 GameObject:
   m_ObjectHideFlags: 0

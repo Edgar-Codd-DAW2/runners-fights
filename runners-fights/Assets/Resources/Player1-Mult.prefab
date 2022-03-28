@@ -402,9 +402,11 @@ MonoBehaviour:
     m_Bits: 0
   isMelee: 0
   attackRate: 0.25
+  damage: 0
   hurtSound: {fileID: 0}
-  healthText: {fileID: 8273741720687440604}
-  playerName: {fileID: 6533169189501758414}
+  health: 5
+  healthBar: {fileID: 1444267155003411699}
+  playerName: {fileID: 6330671634432855246}
   gameOverUI: {fileID: 0}
   playerCamera: {fileID: 1135482056}
   usingLadder: 0
@@ -586,7 +588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1914265924909162599
 RectTransform:
   m_ObjectHideFlags: 0
@@ -946,6 +948,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cba60790444d7840b26236d7f0ea14c, type: 3}
+--- !u!114 &6330671634432855246 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8036714207002770606, guid: 3cba60790444d7840b26236d7f0ea14c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4058645631617413216}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1444267155003411699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3195345586249350291, guid: 3cba60790444d7840b26236d7f0ea14c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4058645631617413216}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6330671634222251544 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8036714206752034424, guid: 3cba60790444d7840b26236d7f0ea14c,
