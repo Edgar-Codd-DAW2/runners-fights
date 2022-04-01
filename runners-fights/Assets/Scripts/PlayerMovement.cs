@@ -242,17 +242,17 @@ public class PlayerMovement : MonoBehaviour
     [PunRPC]
     public void Hit(float amount)
     {
-        if (currentState != PlayerState.defend)
-        {
+        /*if (currentState != PlayerState.defend)
+        {*/
             healthBar.fillAmount -= amount / health / 10;
 
-            if (healthBar.fillAmount <= 0)
+            /*if (healthBar.fillAmount <= 0)
             {
                 GetComponent<Renderer>().enabled = false;
                 gameOverUI.SetActive(true);
                 Time.timeScale = 0f;
             }
-        }
+        }*/
         
     }
 
