@@ -242,33 +242,17 @@ public class PlayerMovement : MonoBehaviour
     [PunRPC]
     public void Hit(float amount)
     {
-        if (view.IsMine)
+        if (currentState != PlayerState.defend)
         {
-            if (currentState != PlayerState.defend)
-            {
-                healthBar.fillAmount -= amount / health / 10;
+            healthBar.fillAmount -= amount / health / 10;
 
-                if (healthBar.fillAmount <= 0)
-                {
-                    GetComponent<Renderer>().enabled = false;
-                    gameOverUI.SetActive(true);
-                    Time.timeScale = 0f;
-                }
-            }
-        } else {
-            if (currentState != PlayerState.defend)
+            if (healthBar.fillAmount <= 0)
             {
-                healthBar.fillAmount -= amount / health / 10;
-
-                if (healthBar.fillAmount <= 0)
-                {
-                    GetComponent<Renderer>().enabled = false;
-                    gameOverUI.SetActive(true);
-                    Time.timeScale = 0f;
-                }
+                GetComponent<Renderer>().enabled = false;
+                gameOverUI.SetActive(true);
+                Time.timeScale = 0f;
             }
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -32,22 +32,22 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    public void SetDirection(Vector2 direction)
+    public virtual void SetDirection(Vector2 direction)
     {
         this.direction = direction;
     }
 
-    public void DestroyBullet()
+    public virtual void DestroyBullet()
     {
         Destroy(gameObject);
     }
 
-    public void SetDamage(float amount)
+    public virtual void SetDamage(float amount)
     {
         damage = amount;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerMovement player1 = collision.GetComponent<PlayerMovement>();
         TurretScript turrets = collision.GetComponent<TurretScript>();
