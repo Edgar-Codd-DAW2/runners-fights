@@ -17986,6 +17986,11 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 65e00fd61c888164db9962202cc08eb0, type: 3}
+    - target: {fileID: 309670953846909736, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 309670954879934944, guid: 91f05ed86bd21a84eb24bbd7af452bd5,
         type: 3}
       propertyPath: healthBar
