@@ -262,7 +262,14 @@ public class PlayerMovement : MonoBehaviour
         TurretScript turrets = collision.GetComponent<TurretScript>();
         if (player1 != null)
         {
-            player1.Hit(damage);
+            if (PhotonNetwork.InRoom)
+            {
+                view.RPC("Hit", RpcTarget.AllBuffered, damage);
+            }
+            else
+            {
+                player1.Hit(damage);
+            }
         }
 
         if (turrets != null)
