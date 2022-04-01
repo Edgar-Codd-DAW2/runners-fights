@@ -466,7 +466,7 @@ MonoBehaviour:
     m_Bits: 128
   isMelee: 1
   attackRate: 0.5
-  damage: 0
+  damage: 2
   hurtSound: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
   health: 10
   healthBar: {fileID: 1867934538124250536}

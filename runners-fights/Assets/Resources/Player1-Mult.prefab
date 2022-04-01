@@ -402,7 +402,7 @@ MonoBehaviour:
     m_Bits: 0
   isMelee: 0
   attackRate: 0.25
-  damage: 0
+  damage: 1
   hurtSound: {fileID: 0}
   health: 5
   healthBar: {fileID: 1444267155003411699}
