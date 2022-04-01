@@ -242,33 +242,49 @@ public class PlayerMovement : MonoBehaviour
     [PunRPC]
     public void Hit(float amount)
     {
-        /*if (currentState != PlayerState.defend)
-        {*/
-            healthBar.fillAmount -= amount / health / 10;
-
-            /*if (healthBar.fillAmount <= 0)
+        if (view.IsMine)
+        {
+            if (currentState != PlayerState.defend)
             {
-                GetComponent<Renderer>().enabled = false;
-                gameOverUI.SetActive(true);
-                Time.timeScale = 0f;
+                healthBar.fillAmount -= amount / health / 10;
+
+                if (healthBar.fillAmount <= 0)
+                {
+                    GetComponent<Renderer>().enabled = false;
+                    gameOverUI.SetActive(true);
+                    Time.timeScale = 0f;
+                }
             }
-        }*/
+        } else {
+            if (currentState != PlayerState.defend)
+            {
+                healthBar.fillAmount -= amount / health / 10;
+
+                if (healthBar.fillAmount <= 0)
+                {
+                    GetComponent<Renderer>().enabled = false;
+                    gameOverUI.SetActive(true);
+                    Time.timeScale = 0f;
+                }
+            }
+        }
         
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerMovement player1 = collision.GetComponent<PlayerMovement>();
+        PlayerMovement player = collision.GetComponent<PlayerMovement>();
+        PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
         TurretScript turrets = collision.GetComponent<TurretScript>();
-        if (player1 != null)
+        if (player != null)
         {
             if (PhotonNetwork.InRoom)
             {
-                view.RPC("Hit", RpcTarget.AllBuffered, damage);
+                playerView.RPC("Hit", RpcTarget.AllBuffered, damage);
             }
             else
             {
-                player1.Hit(damage);
+                player.Hit(damage);
             }
         }
 
