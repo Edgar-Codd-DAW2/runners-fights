@@ -200,10 +200,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (PhotonNetwork.CurrentRoom != null)
         {
-            bullet = PhotonNetwork.Instantiate(bulletPreFab.name, transform.position + direction * 0.5f, Quaternion.identity);
+            bullet = PhotonNetwork.Instantiate(bulletPreFab.name, arm.position + direction * 0.5f, Quaternion.identity);
         } else
         {
-            bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
+            bullet = Instantiate(bulletPreFab, arm.position + direction * 0.5f, Quaternion.identity);
         }
         bullet.GetComponent<BulletScript>().SetDirection(direction);
         bullet.GetComponent<BulletScript>().SetDamage(damage);
