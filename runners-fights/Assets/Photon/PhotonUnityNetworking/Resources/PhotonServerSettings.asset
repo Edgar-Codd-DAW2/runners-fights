@@ -44,6 +44,9 @@ MonoBehaviour:
   - playerHealthText
   - Hit
   - reduceHealth
+  - DestroyBullet
+  - SetDamage
+  - SetDirection
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

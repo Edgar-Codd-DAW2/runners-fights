@@ -4,52 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public enum PlayerState
+public class PlayerMovementMuli : PlayerMovement
 {
-    walk,
-    attack,
-    defend
-}
-
-
-public class PlayerMovement : MonoBehaviour
-{
-    public PlayerState currentState;
-    public GameObject bulletPreFab;
-    public float jumpForce;
-    //public float Speed;
-
-    protected Rigidbody2D rigidbody2D;
-    protected float horizontal;
-    protected float lastShot;
-    protected int Health;
-    public Animator animator;
-    public bool grounded;
-    public float speed;
-    public Transform checkGround;
-    public Transform arm;
-    public Vector3 checkBoxSize;
-    public float attakRange;
-    public LayerMask platformLayerMask;
-    public LayerMask enemyLayerMask;
-    public bool isMelee;
-    public float attackRate;
-    public float damage;
-    public AudioClip hurtSound;
-    public float health;
-    public Image healthBar;
-    public Text playerName;
-    public GameObject gameOverUI;
-    public GameObject playerCamera;
-
-    protected SpriteRenderer myRenderer;
-    protected Shader shaderGUItext;
-    protected Shader shaderSpritesDefault;
-
     PhotonView view;
    
-    public bool usingLadder = false;
-
     void Awake()
     {
         view = GetComponent<PhotonView>();
@@ -78,13 +36,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (view.IsMine)
         {
-            if (PhotonNetwork.InRoom)
-            {
-                //view.RPC("playerHealthText", RpcTarget.AllBuffered);
-            } else
-            {
-                //playerHealthText();
-            }
             if (currentState != PlayerState.attack)
             {
                 horizontal = Input.GetAxisRaw("Horizontal");
@@ -98,13 +49,8 @@ public class PlayerMovement : MonoBehaviour
                     transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 }
 
-                if (PhotonNetwork.InRoom)
-                {
-                    view.RPC("playerPosition", RpcTarget.AllBuffered);
-                } else
-                {
-                    playerPosition();
-                }
+                
+                 view.RPC("playerPosition", RpcTarget.AllBuffered);
 
                 animator.SetBool("running", horizontal != 0.0f);
             }
@@ -156,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    protected void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(checkGround.position, checkBoxSize);
@@ -188,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
         arm.GetComponent<Equip>().SetWeapon(weapon);
     }
 
-    protected void Shoot()
+    private void Shoot()
     {
         Vector3 direction;
         if (transform.localScale.x == 1.0f) direction = Vector2.right;
@@ -196,26 +142,18 @@ public class PlayerMovement : MonoBehaviour
 
         /*GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);*/
-        GameObject bullet = null;
 
-        if (PhotonNetwork.CurrentRoom != null)
-        {
-            bullet = PhotonNetwork.Instantiate(bulletPreFab.name, arm.position + direction * 0.5f, Quaternion.identity);
-        } else
-        {
-            bullet = Instantiate(bulletPreFab, arm.position + direction * 0.5f, Quaternion.identity);
-        }
-        bullet.GetComponent<BulletScript>().SetDirection(direction);
-        bullet.GetComponent<BulletScript>().SetDamage(damage);
-        //bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.AllBuffered);
+        GameObject bullet = PhotonNetwork.Instantiate(bulletPreFab.name, arm.position + direction * 0.5f, Quaternion.identity);
+        bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.AllBuffered, direction);
+        bullet.GetComponent<PhotonView>().RPC("SetDamage", RpcTarget.AllBuffered, damage);
     }
 
-    protected void FixedUpdate()
+    private void FixedUpdate()
     {
         rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y);
     }
 
-    protected IEnumerator DefendCo()
+    private IEnumerator DefendCo()
     {
         currentState = PlayerState.defend;
         yield return null;
@@ -227,13 +165,13 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.walk;
     }
 
-    protected void whiteSprite()
+    private void whiteSprite()
     {
         myRenderer.material.shader = shaderGUItext;
         myRenderer.color = Color.white;
     }
 
-    protected void normalSprite()
+    private void normalSprite()
     {
         myRenderer.material.shader = shaderSpritesDefault;
         myRenderer.color = Color.white;
@@ -249,36 +187,22 @@ public class PlayerMovement : MonoBehaviour
             if (healthBar.fillAmount <= 0)
             {
                 GetComponent<Renderer>().enabled = false;
-                gameOverUI.SetActive(true);
+                //gameOverUI.SetActive(true);
                 Time.timeScale = 0f;
             }
         }
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerMovement player = collision.GetComponent<PlayerMovement>();
         PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
-        TurretScript turrets = collision.GetComponent<TurretScript>();
-        if (player != null)
+        if (playerView != null)
         {
-            if (PhotonNetwork.InRoom)
-            {
-                playerView.RPC("Hit", RpcTarget.AllBuffered, damage);
-            }
-            else
-            {
-                player.Hit(damage);
-            }
-        }
-
-        if (turrets != null)
-        {
-            turrets.Hit(damage);
+            playerView.RPC("Hit", RpcTarget.AllBuffered, damage);
         }
     }
 
-    protected IEnumerator AttackCo()
+    private IEnumerator AttackCo()
     {
         animator.SetTrigger("attack");
         currentState = PlayerState.attack;
@@ -288,22 +212,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     [PunRPC]
-    protected void playerPosition()
+    private void playerPosition()
     {
 
         transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
-    }
-
-    [PunRPC]
-    public void reduceHealth(float amount)
-    {
-        if (view.IsMine)
-        {
-            healthBar.fillAmount -= amount;
-        }
-        else
-        {
-            healthBar.fillAmount -= amount;
-        }
     }
 }

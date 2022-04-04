@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// runners
+using Photon.Pun;
+
 public class BulletScript : MonoBehaviour
 {
     public AudioClip sound;
@@ -32,16 +33,19 @@ public class BulletScript : MonoBehaviour
         }
     }
 
+    [PunRPC]
     public virtual void SetDirection(Vector2 direction)
     {
         this.direction = direction;
     }
 
+    [PunRPC]
     public virtual void DestroyBullet()
     {
         Destroy(gameObject);
     }
 
+    [PunRPC]
     public virtual void SetDamage(float amount)
     {
         damage = amount;

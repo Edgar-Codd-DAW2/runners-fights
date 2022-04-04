@@ -18,7 +18,7 @@ public class BulletScriptMulti : BulletScript
 
         if (collision.gameObject.layer != LayerMask.NameToLayer("Item") && !collision.gameObject.CompareTag("Ladder"))
         {
-            DestroyBullet();
+            GetComponent<PhotonView>().RPC("DestroyBullet", RpcTarget.AllBuffered);
         }
     }
 }
