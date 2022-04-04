@@ -102,20 +102,6 @@ public class PlayerMovementMuli : PlayerMovement
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(checkGround.position, checkBoxSize);
-        Gizmos.DrawWireSphere(arm.position, attakRange);
-    }
-
-        private void Jump() 
-    {
-        rigidbody2D.AddForce(Vector2.up * jumpForce);
-
-
-        //animator.SetFloat("speed", rigidbody2D.velocity.y);
-    }
     /*private void Attack()
     {
         animator.SetTrigger("attack");
@@ -128,13 +114,13 @@ public class PlayerMovementMuli : PlayerMovement
         }
     }*/
 
-    public void PickUP(GameObject weapon)
+    /*public void PickUP(GameObject weapon)
     {
         //GameObject cpWeapon = Instantiate(weapon, arm.position, Quaternion.identity);
         arm.GetComponent<Equip>().SetWeapon(weapon);
-    }
+    }*/
 
-    private void Shoot()
+    protected override void Shoot()
     {
         Vector3 direction;
         if (transform.localScale.x == 1.0f) direction = Vector2.right;
@@ -148,12 +134,8 @@ public class PlayerMovementMuli : PlayerMovement
         bullet.GetComponent<PhotonView>().RPC("SetDamage", RpcTarget.AllBuffered, damage);
     }
 
-    private void FixedUpdate()
-    {
-        rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y);
-    }
 
-    private IEnumerator DefendCo()
+    /*protected override IEnumerator DefendCo()
     {
         currentState = PlayerState.defend;
         yield return null;
@@ -163,22 +145,10 @@ public class PlayerMovementMuli : PlayerMovement
         myRenderer.material.shader = shaderSpritesDefault;
         myRenderer.color = Color.white;
         currentState = PlayerState.walk;
-    }
-
-    private void whiteSprite()
-    {
-        myRenderer.material.shader = shaderGUItext;
-        myRenderer.color = Color.white;
-    }
-
-    private void normalSprite()
-    {
-        myRenderer.material.shader = shaderSpritesDefault;
-        myRenderer.color = Color.white;
-    }
+    }*/
 
     [PunRPC]
-    public void Hit(float amount)
+    public override void Hit(float amount)
     {
         if (currentState != PlayerState.defend)
         {
@@ -188,33 +158,23 @@ public class PlayerMovementMuli : PlayerMovement
             {
                 GetComponent<Renderer>().enabled = false;
                 //gameOverUI.SetActive(true);
-                Time.timeScale = 0f;
+                //Time.timeScale = 0f;
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
         PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
-        if (playerView != null)
+        if (playerView != null && collision.gameObject.CompareTag("Player"))
         {
             playerView.RPC("Hit", RpcTarget.AllBuffered, damage);
         }
     }
 
-    private IEnumerator AttackCo()
-    {
-        animator.SetTrigger("attack");
-        currentState = PlayerState.attack;
-        yield return null;
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-        currentState = PlayerState.walk;
-    }
-
     [PunRPC]
-    private void playerPosition()
+    protected override void playerPosition()
     {
-
         transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
     }
 }

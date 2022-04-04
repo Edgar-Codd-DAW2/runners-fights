@@ -10,7 +10,7 @@ public class BulletScript : MonoBehaviour
     public float damage;
     public float LastShoot;
     private Rigidbody2D rigidbody2D;
-    private Vector2 direction;
+    private Vector3 direction;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class BulletScript : MonoBehaviour
         
     private void FixedUpdate()
     {
-        if (direction == Vector2.left) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        if (direction == Vector3.left) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         else transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         rigidbody2D.velocity = direction * speed;
 
@@ -34,7 +34,7 @@ public class BulletScript : MonoBehaviour
     }
 
     [PunRPC]
-    public virtual void SetDirection(Vector2 direction)
+    public virtual void SetDirection(Vector3 direction)
     {
         this.direction = direction;
     }

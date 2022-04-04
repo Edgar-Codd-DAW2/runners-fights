@@ -29,9 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform checkGround;
     public Transform arm;
     public Vector3 checkBoxSize;
-    public float attakRange;
     public LayerMask platformLayerMask;
-    public LayerMask enemyLayerMask;
     public bool isMelee;
     public float attackRate;
     public float damage;
@@ -46,22 +44,8 @@ public class PlayerMovement : MonoBehaviour
     protected Shader shaderGUItext;
     protected Shader shaderSpritesDefault;
 
-    PhotonView view;
    
     public bool usingLadder = false;
-
-    void Awake()
-    {
-        view = GetComponent<PhotonView>();
-        if (view.IsMine)
-        {
-            playerCamera.SetActive(true);
-            playerName.text = PhotonNetwork.NickName;
-        } else
-        {
-            playerName.text = view.Owner.NickName;
-        }
-    }
 
     void Start()
     {
@@ -76,83 +60,68 @@ public class PlayerMovement : MonoBehaviour
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
-        if (view.IsMine)
+        if (currentState != PlayerState.attack)
         {
-            if (PhotonNetwork.InRoom)
+            horizontal = Input.GetAxisRaw("Horizontal");
+
+            if (horizontal < 0.0f)
             {
-                //view.RPC("playerHealthText", RpcTarget.AllBuffered);
-            } else
-            {
-                //playerHealthText();
+                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
             }
-            if (currentState != PlayerState.attack)
+            else if (horizontal > 0.0f)
             {
-                horizontal = Input.GetAxisRaw("Horizontal");
-
-                if (horizontal < 0.0f)
-                {
-                    transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-                }
-                else if (horizontal > 0.0f)
-                {
-                    transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                }
-
-                if (PhotonNetwork.InRoom)
-                {
-                    view.RPC("playerPosition", RpcTarget.AllBuffered);
-                } else
-                {
-                    playerPosition();
-                }
-
-                animator.SetBool("running", horizontal != 0.0f);
+                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             }
 
-            /*Debug.DrawRay(transform.position, Vector3.down * 2.2f, Color.red);
-            if (Physics2D.Raycast(transform.position, Vector3.down, 2.2f)) 
+            
+            playerPosition();
+
+            animator.SetBool("running", horizontal != 0.0f);
+        }
+
+        /*Debug.DrawRay(transform.position, Vector3.down * 2.2f, Color.red);
+        if (Physics2D.Raycast(transform.position, Vector3.down, 2.2f)) 
+        {
+            grounded = true;
+        } else {
+
+            grounded = false;
+        }*/
+
+
+        grounded = Physics2D.OverlapBox(checkGround.position, checkBoxSize, 0f, platformLayerMask);
+
+
+        if (Input.GetKeyDown(KeyCode.W) && grounded && currentState != PlayerState.attack)
+        {
+            Jump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.J) && Time.time > lastShot + attackRate && currentState != PlayerState.defend)
+        {
+            if (arm.GetComponent<Equip>().IsWeaponSet())
             {
-                grounded = true;
-            } else {
-
-                grounded = false;
-            }*/
-
-
-            grounded = Physics2D.OverlapBox(checkGround.position, checkBoxSize, 0f, platformLayerMask);
-
-
-            if (Input.GetKeyDown(KeyCode.W) && grounded && currentState != PlayerState.attack)
-            {
-                Jump();
+                currentState = PlayerState.attack;
+                arm.GetComponent<Equip>().Attack(gameObject);
+                currentState = PlayerState.walk;
             }
-
-            if (Input.GetKeyDown(KeyCode.J) && Time.time > lastShot + attackRate && currentState != PlayerState.defend)
+            else
             {
-                if (arm.GetComponent<Equip>().IsWeaponSet())
+                if (isMelee)
                 {
-                    currentState = PlayerState.attack;
-                    arm.GetComponent<Equip>().Attack(gameObject);
-                    currentState = PlayerState.walk;
+                    StartCoroutine(AttackCo());
                 }
                 else
                 {
-                    if (isMelee)
-                    {
-                        StartCoroutine(AttackCo());
-                    }
-                    else
-                    {
-                        Shoot();
-                    }
-                    lastShot = Time.time;
+                    Shoot();
                 }
+                lastShot = Time.time;
             }
+        }
 
-            if (Input.GetKeyDown(KeyCode.K) && currentState != PlayerState.attack)
-            {
-                StartCoroutine(DefendCo());
-            }
+        if (Input.GetKeyDown(KeyCode.K) && currentState != PlayerState.attack)
+        {
+            StartCoroutine(DefendCo());
         }
     }
 
@@ -160,10 +129,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(checkGround.position, checkBoxSize);
-        Gizmos.DrawWireSphere(arm.position, attakRange);
     }
 
-        private void Jump() 
+    protected void Jump() 
     {
         rigidbody2D.AddForce(Vector2.up * jumpForce);
 
@@ -188,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         arm.GetComponent<Equip>().SetWeapon(weapon);
     }
 
-    protected void Shoot()
+    protected virtual void Shoot()
     {
         Vector3 direction;
         if (transform.localScale.x == 1.0f) direction = Vector2.right;
@@ -196,18 +164,11 @@ public class PlayerMovement : MonoBehaviour
 
         /*GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);*/
-        GameObject bullet = null;
 
-        if (PhotonNetwork.CurrentRoom != null)
-        {
-            bullet = PhotonNetwork.Instantiate(bulletPreFab.name, arm.position + direction * 0.5f, Quaternion.identity);
-        } else
-        {
-            bullet = Instantiate(bulletPreFab, arm.position + direction * 0.5f, Quaternion.identity);
-        }
+        GameObject bullet = Instantiate(bulletPreFab, arm.position + direction * 0.5f, Quaternion.identity);
+
         bullet.GetComponent<BulletScript>().SetDirection(direction);
         bullet.GetComponent<BulletScript>().SetDamage(damage);
-        //bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.AllBuffered);
     }
 
     protected void FixedUpdate()
@@ -215,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y);
     }
 
-    protected IEnumerator DefendCo()
+    protected virtual IEnumerator DefendCo()
     {
         currentState = PlayerState.defend;
         yield return null;
@@ -227,20 +188,21 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.walk;
     }
 
+    /*
     protected void whiteSprite()
     {
         myRenderer.material.shader = shaderGUItext;
         myRenderer.color = Color.white;
-    }
+    }*/
 
-    protected void normalSprite()
+    /*protected void normalSprite()
     {
         myRenderer.material.shader = shaderSpritesDefault;
         myRenderer.color = Color.white;
-    }
+    }*/
 
-    [PunRPC]
-    public void Hit(float amount)
+
+    public virtual void Hit(float amount)
     {
         if (currentState != PlayerState.defend)
         {
@@ -255,21 +217,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerMovement player = collision.GetComponent<PlayerMovement>();
-        PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
         TurretScript turrets = collision.GetComponent<TurretScript>();
         if (player != null)
         {
-            if (PhotonNetwork.InRoom)
-            {
-                playerView.RPC("Hit", RpcTarget.AllBuffered, damage);
-            }
-            else
-            {
-                player.Hit(damage);
-            }
+            player.Hit(damage);
         }
 
         if (turrets != null)
@@ -287,23 +241,9 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.walk;
     }
 
-    [PunRPC]
-    protected void playerPosition()
-    {
 
+    protected virtual void playerPosition()
+    {
         transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
-    }
-
-    [PunRPC]
-    public void reduceHealth(float amount)
-    {
-        if (view.IsMine)
-        {
-            healthBar.fillAmount -= amount;
-        }
-        else
-        {
-            healthBar.fillAmount -= amount;
-        }
     }
 }

@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 309670954879934958}
   - component: {fileID: 309670954879934957}
   - component: {fileID: 309670954879934956}
-  - component: {fileID: -5406987317994753751}
+  - component: {fileID: 309670954879934944}
   - component: {fileID: 309670954879934945}
   - component: {fileID: 309670954879934946}
   - component: {fileID: 309670954879934947}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: -5278447934699282728}
   - component: {fileID: -7059080232751284105}
   m_Layer: 3
-  m_Name: Player1-Mult
+  m_Name: Player1-Mult-Old
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,7 +371,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.10904336, y: -0.7045735}
   m_Size: {x: 0.49516535, y: 2.558572}
   m_Direction: 0
---- !u!114 &-5406987317994753751
+--- !u!114 &309670954879934944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 309670954879934955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa77c863450a75440b719676344acb71, type: 3}
+  m_Script: {fileID: 11500000, guid: 2afb9a9b694eba94596b4600a5877df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
@@ -393,13 +393,17 @@ MonoBehaviour:
   checkGround: {fileID: 309670955359343098}
   arm: {fileID: 309670953846909736}
   checkBoxSize: {x: 1, y: 0.2, z: 0}
+  attakRange: 0
   platformLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   isMelee: 0
   attackRate: 0.25
   damage: 1
-  hurtSound: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
+  hurtSound: {fileID: 0}
   health: 5
   healthBar: {fileID: 1444267155003411699}
   playerName: {fileID: 6330671634432855246}

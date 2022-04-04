@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1135482057
 Transform:
   m_ObjectHideFlags: 0
@@ -254,7 +254,6 @@ GameObject:
   - component: {fileID: 309670954879934945}
   - component: {fileID: 309670954879934946}
   - component: {fileID: 309670954879934947}
-  - component: {fileID: 4703766210939881915}
   m_Layer: 3
   m_Name: Player1
   m_TagString: Player
@@ -390,13 +389,9 @@ MonoBehaviour:
   checkGround: {fileID: 309670955359343098}
   arm: {fileID: 309670953846909736}
   checkBoxSize: {x: 1, y: 0.2, z: 0}
-  attakRange: 0
   platformLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   isMelee: 0
   attackRate: 0.25
   damage: 1
@@ -456,29 +451,6 @@ MonoBehaviour:
   onLadder: 0
   climbSpeed: 0
   exitHop: 3
---- !u!114 &4703766210939881915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309670954879934955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 0
-  ObservedComponents:
-  - {fileID: 0}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &309670955359343097
 GameObject:
   m_ObjectHideFlags: 0
