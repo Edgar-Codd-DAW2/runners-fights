@@ -135,17 +135,35 @@ public class PlayerMovementMuli : PlayerMovement
     }
 
 
-    /*protected override IEnumerator DefendCo()
+    protected override IEnumerator DefendCo()
     {
-        currentState = PlayerState.defend;
+        view.RPC("SetPlayerState", RpcTarget.AllBuffered, (byte)PlayerState.defend);
         yield return null;
+        view.RPC("SetWhite", RpcTarget.AllBuffered);
+        yield return new WaitForSeconds(3f);
+        view.RPC("SetNormal", RpcTarget.AllBuffered);
+        view.RPC("SetPlayerState", RpcTarget.AllBuffered, (byte)PlayerState.walk);
+    }
+
+    [PunRPC]
+    private void SetPlayerState(byte playerState)
+    {
+        currentState = (PlayerState)playerState;
+    }
+
+    [PunRPC]
+    private void SetWhite()
+    {
         myRenderer.material.shader = shaderGUItext;
         myRenderer.color = Color.white;
-        yield return new WaitForSeconds(3f);
+    }
+
+    [PunRPC]
+    private void SetNormal()
+    {
         myRenderer.material.shader = shaderSpritesDefault;
         myRenderer.color = Color.white;
-        currentState = PlayerState.walk;
-    }*/
+    }
 
     [PunRPC]
     public override void Hit(float amount)

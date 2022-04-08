@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public enum PlayerState
+
+public enum PlayerState : byte
 {
     walk,
     attack,

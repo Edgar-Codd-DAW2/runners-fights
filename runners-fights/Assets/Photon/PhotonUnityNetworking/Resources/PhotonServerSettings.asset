@@ -47,6 +47,10 @@ MonoBehaviour:
   - DestroyBullet
   - SetDamage
   - SetDirection
+  - SetPlayerState
+  - SetShader
+  - SetNormal
+  - SetWhite
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

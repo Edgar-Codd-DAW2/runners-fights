@@ -32,7 +32,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        Debug.Log(PhotonNetwork.OfflineMode);
         if (PhotonNetwork.OfflineMode)
         {
             PhotonNetwork.OfflineMode = false;

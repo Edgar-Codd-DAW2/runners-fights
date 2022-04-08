@@ -20,6 +20,5 @@ public class OfflineMode : MonoBehaviourPunCallbacks
             yield return null;
         }
         PhotonNetwork.OfflineMode = true;
-        Debug.Log(PhotonNetwork.OfflineMode);
     }
 }
