@@ -4,11 +4,14 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
     public InputField roomInputField;
+    public GameObject loadingPanel;
     public GameObject lobbyPanel;
     public GameObject roomPanel;
     public Text roomName;
@@ -25,10 +28,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Transform playerItemParent;
 
     public GameObject playButton;
+    public Text buttonText;
 
     void Start()
     {
-        PhotonNetwork.JoinLobby();
+        Debug.Log(PhotonNetwork.OfflineMode);
+        if (PhotonNetwork.OfflineMode)
+        {
+            PhotonNetwork.OfflineMode = false;
+            PhotonNetwork.ConnectUsingSettings();
+            StartCoroutine(Reconnect());
+        } else
+        {
+            PhotonNetwork.JoinLobby();
+            lobbyPanel.SetActive(true);
+            loadingPanel.SetActive(false);
+        }
     }
 
     void Update()
@@ -36,7 +51,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             playButton.SetActive(true);
-        } else
+        }
+        else
         {
             playButton.SetActive(false);
         }
@@ -51,8 +67,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (roomInputField.text.Length >= 1)
         {
+            buttonText.text = "Creando...";
             PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions(){ MaxPlayers = 4, BroadcastPropsChangeToAll = true });
         }
+    }
+
+    public void OnClickLeaveLobby()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     public override void OnJoinedRoom()
@@ -149,5 +171,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void OnClickPlayButton()
     {
         PhotonNetwork.LoadLevel("Stadiummulti1");
+    }
+
+    IEnumerator Reconnect()
+    {
+        while (!PhotonNetwork.IsConnectedAndReady)
+        {
+            yield return null;
+        }
+        lobbyPanel.SetActive(true);
+        loadingPanel.SetActive(false);
     }
 }
