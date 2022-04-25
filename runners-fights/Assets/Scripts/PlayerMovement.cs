@@ -211,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (healthBar.fillAmount <= 0)
             {
+                transform.GetChild(2).gameObject.SetActive(false);
                 GetComponent<Renderer>().enabled = false;
                 gameOverUI.SetActive(true);
                 Time.timeScale = 0f;

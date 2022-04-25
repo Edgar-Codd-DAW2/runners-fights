@@ -30,10 +30,6 @@ public class ladderMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, vertical * speed);
 
         }
-        else
-        {
-            rb.gravityScale = 4f;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,6 +46,7 @@ public class ladderMovement : MonoBehaviour
         {
             isLadder = false;
             isClimbing = false;
+            rb.gravityScale = 4f;
         }
     }
 }

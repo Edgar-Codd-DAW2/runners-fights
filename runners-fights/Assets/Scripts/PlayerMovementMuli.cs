@@ -174,9 +174,7 @@ public class PlayerMovementMuli : PlayerMovement
 
             if (healthBar.fillAmount <= 0)
             {
-                GetComponent<Renderer>().enabled = false;
-                //gameOverUI.SetActive(true);
-                //Time.timeScale = 0f;
+                view.RPC("SetSpectatorMode", RpcTarget.AllBuffered);
             }
         }
     }
@@ -188,6 +186,15 @@ public class PlayerMovementMuli : PlayerMovement
         {
             playerView.RPC("Hit", RpcTarget.AllBuffered, damage);
         }
+    }
+
+    [PunRPC]
+    private void SetSpectatorMode()
+    {
+        rigidbody2D.gravityScale = 0;
+        transform.GetChild(2).gameObject.SetActive(false);
+        GetComponent<CapsuleCollider2D>().isTrigger = true;
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .5f);
     }
 
     [PunRPC]
