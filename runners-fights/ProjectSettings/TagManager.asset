@@ -7,6 +7,7 @@ TagManager:
   - escalera
   - Ladder
   - Teleporter
+  - PlayerSpawner
   layers:
   - Default
   - TransparentFX

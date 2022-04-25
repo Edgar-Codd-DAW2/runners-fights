@@ -29,12 +29,12 @@ public class PlayerMovementMuli : PlayerMovement
 
         myRenderer = gameObject.GetComponent<SpriteRenderer>();
         shaderGUItext = Shader.Find("GUI/Text Shader");
-        shaderSpritesDefault = Shader.Find("Sprites/Default");
+        shaderSpritesDefault = Shader.Find("Sprites/Default"f
     }
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
-        if (view.IsMine)
+        if (view.IsMine && healthBar.fillAmount <= 0)
         {
             if (currentState != PlayerState.attack)
             {
@@ -174,7 +174,7 @@ public class PlayerMovementMuli : PlayerMovement
 
             if (healthBar.fillAmount <= 0)
             {
-                view.RPC("SetSpectatorMode", RpcTarget.AllBuffered);
+                view.RPC("Die", RpcTarget.AllBuffered);
             }
         }
     }
@@ -189,17 +189,26 @@ public class PlayerMovementMuli : PlayerMovement
     }
 
     [PunRPC]
-    private void SetSpectatorMode()
+    private void Die()
     {
-        rigidbody2D.gravityScale = 0;
         transform.GetChild(2).gameObject.SetActive(false);
-        GetComponent<CapsuleCollider2D>().isTrigger = true;
-        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .5f);
+        GetComponent<Renderer>().enabled = false;
+        gameOverUI.SetActive(true);
     }
 
     [PunRPC]
     protected override void playerPosition()
     {
         transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+    }
+
+    [PunRPC]
+    public void Respawn(Vector3 respwanPosition)
+    {
+        gameOverUI.SetActive(false);
+        transform.position = respwanPosition;
+        transform.GetChild(2).gameObject.SetActive(true);
+        healthBar.fillAmount = 1f;
+        GetComponent<Renderer>().enabled = true;
     }
 }

@@ -403,7 +403,8 @@ MonoBehaviour:
   health: 5
   healthBar: {fileID: 1444267155003411699}
   playerName: {fileID: 6330671634432855246}
-  gameOverUI: {fileID: 0}
+  gameOverUI: {fileID: 7606146387080503848, guid: 342bc3425764fb543a6866ff981a3e26,
+    type: 3}
   playerCamera: {fileID: 1135482056}
   usingLadder: 0
 --- !u!95 &309670954879934945

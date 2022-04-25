@@ -18,4 +18,10 @@ public class PlayerSpawner : MonoBehaviour
         PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint.position, Quaternion.identity);
         //sceneCamera.SetActive(false);
     }
+
+    void Respawn()
+    {
+        int randomNumber = Random.Range(0, spawnPoints.Length);
+        Transform spawnPoint = spawnPoints[randomNumber];
+    }
 }
