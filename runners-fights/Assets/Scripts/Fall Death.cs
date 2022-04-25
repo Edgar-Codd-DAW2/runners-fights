@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-
-public class passLvl2 : MonoBehaviour
+public class FallDeath : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(6);
+            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+            player.Death();
         }
     }
 }

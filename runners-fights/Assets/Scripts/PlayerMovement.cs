@@ -219,6 +219,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void Death()
+    {
+        healthBar.fillAmount = 0;
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerMovement player = collision.GetComponent<PlayerMovement>();
