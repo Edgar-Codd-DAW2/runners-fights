@@ -490,6 +490,7 @@ MonoBehaviour:
   gameOverUI: {fileID: 778295525621632645}
   playerCamera: {fileID: 6502139636730012290}
   usingLadder: 0
+  view: {fileID: 0}
 --- !u!114 &6502139637302142131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,6 +592,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6502139637302142136}
     m_Modifications:
+    - target: {fileID: -1039973349134078476, guid: 273c238708805c2419581d3839c31a51,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 6502139637302142138}
     - target: {fileID: 1163664279257096881, guid: 273c238708805c2419581d3839c31a51,
         type: 3}
       propertyPath: m_Pivot.x
@@ -700,6 +706,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DeathMenuMulti
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163664279257096893, guid: 273c238708805c2419581d3839c31a51,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 273c238708805c2419581d3839c31a51, type: 3}

@@ -6,7 +6,8 @@ using Photon.Pun;
 
 public class PlayerMovementMuli : PlayerMovement
 {
-    PhotonView view;
+    private string lastPlayerToHit;
+    public PhotonView view;
    
     void Awake()
     {
@@ -29,12 +30,12 @@ public class PlayerMovementMuli : PlayerMovement
 
         myRenderer = gameObject.GetComponent<SpriteRenderer>();
         shaderGUItext = Shader.Find("GUI/Text Shader");
-        shaderSpritesDefault = Shader.Find("Sprites/Default"f
+        shaderSpritesDefault = Shader.Find("Sprites/Default");
     }
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
-        if (view.IsMine && healthBar.fillAmount <= 0)
+        if (view.IsMine && gameObject.GetComponent<CapsuleCollider2D>().enabled && healthBar.fillAmount > 0)
         {
             if (currentState != PlayerState.attack)
             {
@@ -99,6 +100,13 @@ public class PlayerMovementMuli : PlayerMovement
             {
                 StartCoroutine(DefendCo());
             }
+        } 
+        else if (view.IsMine)
+        {
+            gameOverUI.SetActive(true);
+        } else
+        {
+            gameOverUI.SetActive(false);
         }
     }
 
@@ -166,15 +174,20 @@ public class PlayerMovementMuli : PlayerMovement
     }
 
     [PunRPC]
-    public override void Hit(float amount)
+    public void Hit(float amount, string name)
     {
         if (currentState != PlayerState.defend)
         {
             healthBar.fillAmount -= amount / health / 10;
+            if (name != "")
+            {
+               lastPlayerToHit = name;
+            }
 
             if (healthBar.fillAmount <= 0)
             {
                 view.RPC("Die", RpcTarget.AllBuffered);
+                SendToRanking();
             }
         }
     }
@@ -184,16 +197,23 @@ public class PlayerMovementMuli : PlayerMovement
         PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
         if (playerView != null && collision.gameObject.CompareTag("Player"))
         {
-            playerView.RPC("Hit", RpcTarget.AllBuffered, damage);
+            playerView.RPC("Hit", RpcTarget.AllBuffered, damage, PhotonNetwork.NickName);
         }
     }
 
     [PunRPC]
     private void Die()
     {
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         transform.GetChild(2).gameObject.SetActive(false);
         GetComponent<Renderer>().enabled = false;
         gameOverUI.SetActive(true);
+    }
+
+    public void SendToRanking()
+    {
+        Debug.Log(lastPlayerToHit);
     }
 
     [PunRPC]
@@ -205,6 +225,8 @@ public class PlayerMovementMuli : PlayerMovement
     [PunRPC]
     public void Respawn(Vector3 respwanPosition)
     {
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         gameOverUI.SetActive(false);
         transform.position = respwanPosition;
         transform.GetChild(2).gameObject.SetActive(true);

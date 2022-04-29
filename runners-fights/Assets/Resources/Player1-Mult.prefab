@@ -407,6 +407,7 @@ MonoBehaviour:
     type: 3}
   playerCamera: {fileID: 1135482056}
   usingLadder: 0
+  view: {fileID: 0}
 --- !u!95 &309670954879934945
 Animator:
   serializedVersion: 3
