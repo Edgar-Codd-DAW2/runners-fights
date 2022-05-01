@@ -15,6 +15,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject lobbyPanel;
     public GameObject roomPanel;
     public Text roomName;
+    public Button createButton;
 
     public RoomItem roomItemPrefab;
     List<RoomItem> roomItemList = new List<RoomItem>();
@@ -32,7 +33,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        if (PhotonNetwork.OfflineMode)
+        if (PhotonNetwork.OfflineMode || !PhotonNetwork.IsConnected)
         {
             PhotonNetwork.OfflineMode = false;
             PhotonNetwork.ConnectUsingSettings();
@@ -66,6 +67,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (roomInputField.text.Length >= 1)
         {
+            createButton.interactable = false;
             buttonText.text = "Creando...";
             PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions(){ MaxPlayers = 4, BroadcastPropsChangeToAll = true });
         }
@@ -78,6 +80,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        loadingPanel.SetActive(false);
         lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
         roomName.text = "Sala " + PhotonNetwork.CurrentRoom.Name;
@@ -111,6 +114,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom(string roomName)
     {
+        loadingPanel.SetActive(true);
         PhotonNetwork.JoinRoom(roomName);
     }
     public void OnClickLeaveRoom()

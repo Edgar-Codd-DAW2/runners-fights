@@ -34,19 +34,19 @@ public class BulletScript : MonoBehaviour
     }
 
     [PunRPC]
-    public virtual void SetDirection(Vector3 direction)
+    public void SetDirection(Vector3 direction)
     {
         this.direction = direction;
     }
 
     [PunRPC]
-    public virtual void DestroyBullet()
+    public void DestroyBullet()
     {
         Destroy(gameObject);
     }
 
     [PunRPC]
-    public virtual void SetDamage(float amount)
+    public void SetDamage(float amount)
     {
         damage = amount;
     }

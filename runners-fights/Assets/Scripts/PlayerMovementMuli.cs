@@ -140,6 +140,7 @@ public class PlayerMovementMuli : PlayerMovement
         GameObject bullet = PhotonNetwork.Instantiate(bulletPreFab.name, arm.position + direction * 0.5f, Quaternion.identity);
         bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.AllBuffered, direction);
         bullet.GetComponent<PhotonView>().RPC("SetDamage", RpcTarget.AllBuffered, damage);
+        bullet.GetComponent<PhotonView>().RPC("SetOwner", RpcTarget.AllBuffered, PhotonNetwork.NickName);
     }
 
 
@@ -181,7 +182,8 @@ public class PlayerMovementMuli : PlayerMovement
             healthBar.fillAmount -= amount / health / 10;
             if (name != "")
             {
-               lastPlayerToHit = name;
+                Debug.Log("Hit by: " + name);
+                lastPlayerToHit = name;
             }
 
             if (healthBar.fillAmount <= 0)
@@ -213,7 +215,7 @@ public class PlayerMovementMuli : PlayerMovement
 
     public void SendToRanking()
     {
-        Debug.Log(lastPlayerToHit);
+        Debug.Log("Killed by: " + lastPlayerToHit);
     }
 
     [PunRPC]

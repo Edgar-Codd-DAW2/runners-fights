@@ -4,17 +4,19 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class DeathMulti : MonoBehaviourPunCallbacks
+
+public class DeathMulti : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
-    private Text roomName;
+    //private Text roomName;
 
-    void Start()
+    /*void Start()
     {
         roomName.text = "Sala " + PhotonNetwork.CurrentRoom.Name;
-    }
+    }*/
 
     
     public void Respawn()
@@ -26,17 +28,39 @@ public class DeathMulti : MonoBehaviourPunCallbacks
         Vector3 spawnPoint = spawnPoints[randomNumber].position;
 
         player.GetComponent<PhotonView>().RPC("Respawn", RpcTarget.AllBuffered, spawnPoint);
+        //GameObject.Find("MainCamera").GetComponent<Camera>().enabled = true;
     }
 
     public void Leave()
     {
-        //Debug.Log("Sala " + PhotonNetwork.CurrentRoom.Name);
-        PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.LocalPlayer.ActorNumber);
-        PhotonNetwork.LeaveRoom();
+        Debug.Log(PhotonNetwork.CurrentRoom.Name);
+        //PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.LocalPlayer.ActorNumber);
+        //PhotonNetwork.Disconnect();
+        Debug.Log("Leaving");
+        //SceneManager.LoadScene("Menu");
+        //StartCoroutine(DisconnectAndLeave());
+        GameObject.FindWithTag("PlayerSpawner").GetComponent<PlayerSpawner>().DisconnectPlayer();
     }
 
-    public override void OnLeftRoom()
+    /*public override void OnConnectedToMaster()
     {
+        Debug.Log("Conected");
         PhotonNetwork.LoadLevel("Lobby");
-    }
+    }*/
+
+    /*public override void OnLeftRoom()
+    {
+        Debug.Log("Left");
+        PhotonNetwork.LoadLevel("Lobby");
+    }*/
+
+    /*private IEnumerator DisconnectAndLeave()
+    {
+        Debug.Log("Co");
+        PhotonNetwork.Disconnect();
+        Debug.Log("routine");
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Scene");
+        SceneManager.LoadScene("Menu");
+    }*/
 }

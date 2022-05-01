@@ -4,7 +4,9 @@ using UnityEngine;
 using Photon.Pun;
 
 public class BulletScriptMulti : BulletScript
-{   
+{
+    private string ownerName;
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (!GetComponent<PhotonView>().IsMine) return;
@@ -13,12 +15,19 @@ public class BulletScriptMulti : BulletScript
 
         if (playerView != null)
         {
-            playerView.RPC("Hit", RpcTarget.AllBuffered, damage);
+            playerView.RPC("Hit", RpcTarget.AllBuffered, damage, ownerName);
         }
 
         if (collision.gameObject.layer != LayerMask.NameToLayer("Item") && !collision.gameObject.CompareTag("Ladder"))
         {
             GetComponent<PhotonView>().RPC("DestroyBullet", RpcTarget.AllBuffered);
         }
+    }
+
+    [PunRPC]
+    public void SetOwner(string owner)
+    {
+        Debug.Log(owner);
+        ownerName = owner;
     }
 }
