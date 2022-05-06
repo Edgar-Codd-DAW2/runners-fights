@@ -14,7 +14,7 @@ public class BulletScriptMulti : BulletScript
         Debug.Log("1");
         PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
         Debug.Log("2");
-        if (collision.gameObject.CompareTag("Player") && playerView != null)
+        if (!collision.gameObject.CompareTag("Weapon") && collision.gameObject.CompareTag("Player") && playerView != null)
         {
             Debug.Log("3");
             playerView.RPC("Hit", RpcTarget.AllBuffered, damage, owner);
