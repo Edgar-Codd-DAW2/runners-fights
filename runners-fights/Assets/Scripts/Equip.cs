@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Equip : MonoBehaviour
 {
     public GameObject weapon;
     private float horizontal;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -31,6 +27,7 @@ public class Equip : MonoBehaviour
         }
     }
 
+    [PunRPC]
     public bool IsWeaponSet()
     {
         return weapon != null;
@@ -42,7 +39,8 @@ public class Equip : MonoBehaviour
         weapon.transform.position = transform.position;
     }
 
-    public void Attack(GameObject player)
+    [PunRPC]
+    public void Attack()
     {
         weapon.GetComponent<Weapon>().Attack();
     }

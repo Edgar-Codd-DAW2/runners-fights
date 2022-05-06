@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
             if (arm.GetComponent<Equip>().IsWeaponSet())
             {
                 currentState = PlayerState.attack;
-                arm.GetComponent<Equip>().Attack(gameObject);
+                arm.GetComponent<Equip>().Attack();
                 currentState = PlayerState.walk;
             }
             else
@@ -172,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
         bullet.GetComponent<BulletScript>().SetDamage(damage);
     }
 
-    protected void FixedUpdate()
+    void FixedUpdate()
     {
         rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y);
     }

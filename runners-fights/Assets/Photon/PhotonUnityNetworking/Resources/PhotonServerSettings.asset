@@ -55,6 +55,16 @@ MonoBehaviour:
   - Die
   - Respawn
   - SetOwner
+  - Attack
+  - Drop
+  - PickUp
+  - SetWeaponState
+  - Shoot
+  - IsWeaponSet
+  - SetWeapon
+  - PickUP
+  - SetWeaponMulti
+  - SetPlayerOwner
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

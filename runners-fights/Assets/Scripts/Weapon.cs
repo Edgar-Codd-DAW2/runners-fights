@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-
-public enum WeaponState
+public enum WeaponState : byte
 {
     idle,
     attack,
@@ -15,18 +15,18 @@ public class Weapon : MonoBehaviour
 {
     // Start is called before the first frame update
     public WeaponState currentState;
-    private bool pickUpAllowed;
+    protected bool pickUpAllowed;
     public GameObject player;
-    private BoxCollider2D boxCollider2D;
+    protected BoxCollider2D boxCollider2D;
     public Animator animator;
     public bool isMelee;
     public GameObject bulletPreFab;
     public Transform bulletPosicion;
     public float damage;
-    private float timeToDestroy;
+    protected float timeToDestroy;
 
     // Use this for initialization
-    private void Start()
+    void Start()
     {
         currentState = WeaponState.idle;
 
@@ -36,8 +36,8 @@ public class Weapon : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
-    {
+     void Update()
+     {
         if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
         {
             PickUp();
@@ -45,18 +45,18 @@ public class Weapon : MonoBehaviour
 
         if (transform.parent == null)
         {
-            if (timeToDestroy > 0)
+            /*if (timeToDestroy > 0)
             {
                 timeToDestroy -= Time.deltaTime;
             }
             else
             {
                 Destroy(gameObject);
-            }
+            }*/
         }
-    }
+     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (currentState == WeaponState.attack) 
         {
@@ -86,7 +86,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && transform.parent == null)
         {
@@ -95,12 +95,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public bool IsMelee()
-    {
-        return isMelee;
-    }
-
-    public void Attack()
+    public virtual void Attack()
     {
         if (isMelee)
         {
@@ -112,7 +107,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    protected virtual void Shoot()
     {
         Vector3 direction;
         if (player.transform.localScale.x == 1.0f) direction = Vector2.right;
@@ -124,7 +119,7 @@ public class Weapon : MonoBehaviour
 
     }
 
-    private void PickUp()
+    protected virtual void PickUp()
     {
 
         player.GetComponent<PlayerMovement>().PickUP(gameObject);
@@ -138,6 +133,7 @@ public class Weapon : MonoBehaviour
         //Destroy(gameObject);
     }
 
+    [PunRPC]
     public void Drop()
     {
         boxCollider2D.enabled = true;
@@ -146,7 +142,7 @@ public class Weapon : MonoBehaviour
         timeToDestroy = 5f;
     }
 
-    private IEnumerator AttackCo()
+    protected virtual IEnumerator AttackCo()
     {
         animator.SetTrigger("attack");
         currentState = WeaponState.attack;

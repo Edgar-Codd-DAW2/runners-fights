@@ -24,13 +24,16 @@ public class PlayerMovementMuli : PlayerMovement
 
     void Start()
     {
-        currentState = PlayerState.walk;
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        if (view.IsMine)
+        {
+            currentState = PlayerState.walk;
+            rigidbody2D = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
 
-        myRenderer = gameObject.GetComponent<SpriteRenderer>();
-        shaderGUItext = Shader.Find("GUI/Text Shader");
-        shaderSpritesDefault = Shader.Find("Sprites/Default");
+            myRenderer = gameObject.GetComponent<SpriteRenderer>();
+            shaderGUItext = Shader.Find("GUI/Text Shader");
+            shaderSpritesDefault = Shader.Find("Sprites/Default");
+        }
     }
     //capturar input de teclado valores de 1 a -1
     void Update()
@@ -76,10 +79,10 @@ public class PlayerMovementMuli : PlayerMovement
 
             if (Input.GetKeyDown(KeyCode.J) && Time.time > lastShot + attackRate && currentState != PlayerState.defend)
             {
-                if (arm.GetComponent<Equip>().IsWeaponSet())
+                if (arm.GetComponent<Equip>().weapon != null)
                 {
                     currentState = PlayerState.attack;
-                    arm.GetComponent<Equip>().Attack(gameObject);
+                    arm.GetComponent<PhotonView>().RPC("Attack", RpcTarget.AllBuffered);
                     currentState = PlayerState.walk;
                 }
                 else
@@ -110,6 +113,14 @@ public class PlayerMovementMuli : PlayerMovement
         }
     }
 
+    void FixedUpdate()
+    {
+        if (view.IsMine)
+        {
+            rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y);
+        }
+    }
+
     /*private void Attack()
     {
         animator.SetTrigger("attack");
@@ -122,11 +133,12 @@ public class PlayerMovementMuli : PlayerMovement
         }
     }*/
 
-    /*public void PickUP(GameObject weapon)
+    [PunRPC]
+    public void PickUP(int viewID)
     {
         //GameObject cpWeapon = Instantiate(weapon, arm.position, Quaternion.identity);
-        arm.GetComponent<Equip>().SetWeapon(weapon);
-    }*/
+        arm.GetComponent<PhotonView>().RPC("SetWeaponMulti", RpcTarget.AllBuffered, viewID);
+    }
 
     protected override void Shoot()
     {

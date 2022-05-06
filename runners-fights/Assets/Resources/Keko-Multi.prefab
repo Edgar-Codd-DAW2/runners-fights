@@ -234,7 +234,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6502139637003696653}
   - component: {fileID: 6502139637003696652}
-  - component: {fileID: 6502139637003696651}
+  - component: {fileID: 626747864885417481}
+  - component: {fileID: 2442408802070631760}
+  - component: {fileID: 6964387722619360570}
   m_Layer: 3
   m_Name: Arm
   m_TagString: Untagged
@@ -290,7 +292,7 @@ PolygonCollider2D:
       - {x: -0.2160505, y: -0.5130575}
       - {x: 0.25245714, y: -0.7537533}
       - {x: 0.25450236, y: 0.21395749}
---- !u!114 &6502139637003696651
+--- !u!114 &626747864885417481
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,10 +301,67 @@ MonoBehaviour:
   m_GameObject: {fileID: 6502139637003696654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f5028f8e83b98a49a0419056dfe4ee5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6298c97e37143c647a8c2353db337090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
+  view: {fileID: 0}
+--- !u!114 &2442408802070631760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502139637003696654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 6964387722619360570}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &6964387722619360570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502139637003696654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 4
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 4
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!1 &6502139637302142138
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +376,7 @@ GameObject:
   - component: {fileID: 6502139637302142134}
   - component: {fileID: 6502139637302142132}
   - component: {fileID: 3419262921467801612}
-  - component: {fileID: 6502139637302142131}
+  - component: {fileID: 2561027123881096094}
   - component: {fileID: 6453069385021726187}
   - component: {fileID: 5621159630889284560}
   - component: {fileID: -4554460836816826890}
@@ -491,7 +550,7 @@ MonoBehaviour:
   playerCamera: {fileID: 6502139636730012290}
   usingLadder: 0
   view: {fileID: 0}
---- !u!114 &6502139637302142131
+--- !u!114 &2561027123881096094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -500,7 +559,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6502139637302142138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b4e75bcfaecf43458e75c3cb53a9d0b, type: 3}
+  m_Script: {fileID: 11500000, guid: d05175d5469d91444b7df16d19cb43e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6502139637302142134}

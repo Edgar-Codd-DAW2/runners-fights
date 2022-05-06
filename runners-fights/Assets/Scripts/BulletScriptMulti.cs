@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class BulletScriptMulti : BulletScript
 {
-    private string ownerName;
+    private string owner;
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,7 +15,7 @@ public class BulletScriptMulti : BulletScript
 
         if (playerView != null)
         {
-            playerView.RPC("Hit", RpcTarget.AllBuffered, damage, ownerName);
+            playerView.RPC("Hit", RpcTarget.AllBuffered, damage, owner);
         }
 
         if (collision.gameObject.layer != LayerMask.NameToLayer("Item") && !collision.gameObject.CompareTag("Ladder"))
@@ -25,9 +25,9 @@ public class BulletScriptMulti : BulletScript
     }
 
     [PunRPC]
-    public void SetOwner(string owner)
+    public void SetOwner(string newOwner)
     {
         Debug.Log(owner);
-        ownerName = owner;
+        owner = newOwner;
     }
 }
