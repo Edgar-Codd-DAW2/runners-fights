@@ -12,6 +12,7 @@ public class BulletScript : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     private Vector3 direction;
     public Camera camera;
+    public AudioClip hurt;
 
     void Start()
     {
@@ -62,11 +63,15 @@ public class BulletScript : MonoBehaviour
         if (player1 != null)
         {
             player1.Hit(damage);
+            camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
+            camera.GetComponent<AudioSource>().PlayOneShot(hurt);
         }
 
         if (turrets != null)
         {
             turrets.Hit(damage);
+            camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
+            camera.GetComponent<AudioSource>().PlayOneShot(hurt);
         }
         if (collision.gameObject.layer != LayerMask.NameToLayer("Item") && !collision.gameObject.CompareTag("Ladder"))
         {

@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: 5e5440cb8770ecb46bbca4ae2eee6483, type: 3}
-  hurtSound: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
   speed: 10
+  damage: 0
   LastShoot: 1
+  camera: {fileID: 0}
+  hurt: {fileID: 8300000, guid: 4168ac081f2c51d4e828ec7493c53bf7, type: 3}

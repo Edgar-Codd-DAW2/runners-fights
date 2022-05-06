@@ -24,6 +24,9 @@ public class Weapon : MonoBehaviour
     public Transform bulletPosicion;
     public float damage;
     protected float timeToDestroy;
+    public Camera camera;
+    public AudioClip corte;
+    public AudioClip hurt;
 
     // Use this for initialization
     void Start()
@@ -68,6 +71,8 @@ public class Weapon : MonoBehaviour
                 {
                     Debug.Log(player);
                     player1.Hit(damage);
+                    camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
+                    camera.GetComponent<AudioSource>().PlayOneShot(hurt);
                 }
             }
 
@@ -100,6 +105,8 @@ public class Weapon : MonoBehaviour
         if (isMelee)
         {
             StartCoroutine(AttackCo());
+            camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
+            camera.GetComponent<AudioSource>().PlayOneShot(corte);
         } 
         else
         {
