@@ -8,6 +8,7 @@ public class PlayerMovementMuli : PlayerMovement
 {
     private string lastPlayerToHit;
     public PhotonView view;
+    public PhotonView weaponView;
    
     void Awake()
     {
@@ -102,6 +103,10 @@ public class PlayerMovementMuli : PlayerMovement
             if (Input.GetKeyDown(KeyCode.K) && currentState != PlayerState.attack)
             {
                 StartCoroutine(DefendCo());
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && weaponView != null) {
+                weaponView.RPC("PickUp", RpcTarget.AllBuffered, view.ViewID);
             }
         } 
         else if (view.IsMine)
@@ -208,10 +213,14 @@ public class PlayerMovementMuli : PlayerMovement
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
-        if (playerView != null && collision.gameObject.CompareTag("Player"))
+        PhotonView collisionView = collision.gameObject.GetComponent<PhotonView>();
+        if (collisionView != null && collision.gameObject.CompareTag("Player"))
         {
-            playerView.RPC("Hit", RpcTarget.AllBuffered, damage, PhotonNetwork.NickName);
+            collisionView.RPC("Hit", RpcTarget.AllBuffered, damage, PhotonNetwork.NickName);
+        }
+        if (view.IsMine && collisionView != null && collision.gameObject.CompareTag("Weapon") )
+        {
+            weaponView = collisionView;
         }
     }
 

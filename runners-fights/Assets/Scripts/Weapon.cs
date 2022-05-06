@@ -15,15 +15,15 @@ public class Weapon : MonoBehaviour
 {
     // Start is called before the first frame update
     public WeaponState currentState;
-    protected bool pickUpAllowed;
+    public bool pickUpAllowed;
     public GameObject player;
-    protected BoxCollider2D boxCollider2D;
+    public BoxCollider2D boxCollider2D;
     public Animator animator;
     public bool isMelee;
     public GameObject bulletPreFab;
     public Transform bulletPosicion;
     public float damage;
-    protected float timeToDestroy;
+    public float timeToDestroy;
     public Camera camera;
     public AudioClip corte;
     public AudioClip hurt;
@@ -41,10 +41,10 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
      void Update()
      {
-        if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
+        /*if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
         {
             PickUp();
-        }
+        }*/
 
         if (transform.parent == null)
         {

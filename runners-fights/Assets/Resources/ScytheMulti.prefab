@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 6980913023731709401}
   m_Layer: 8
   m_Name: ScytheMulti
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,12 +155,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  pickUpAllowed: 0
   player: {fileID: 0}
+  boxCollider2D: {fileID: 0}
   animator: {fileID: 0}
   isMelee: 1
   bulletPreFab: {fileID: 0}
   bulletPosicion: {fileID: 0}
   damage: 3
+  timeToDestroy: 0
+  camera: {fileID: 0}
+  corte: {fileID: 0}
+  hurt: {fileID: 0}
   view: {fileID: 0}
   owner: 
 --- !u!50 &7799753934130167950

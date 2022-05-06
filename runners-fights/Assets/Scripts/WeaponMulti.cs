@@ -10,24 +10,23 @@ public class WeaponMulti : Weapon
     void Start()
     {
         view = GetComponent<PhotonView>();
-        if (view.IsMine)
-        {
+
             currentState = WeaponState.idle;
 
             boxCollider2D = GetComponent<BoxCollider2D>();
             animator = GetComponent<Animator>();
             timeToDestroy = 10f;
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
-            if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
+        if (view.IsMine)
+        {
+            /*if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
             {
                 view.RPC("PickUp", RpcTarget.AllBuffered);
-            }
+            }*/
 
             if (transform.parent == null)
             {
@@ -40,14 +39,11 @@ public class WeaponMulti : Weapon
                     Destroy(gameObject);
                 }*/
             }
+        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!view.IsMine)
-        {
-            return;
-        }
         Debug.Log("!!!!!!!!!!");
         if (currentState == WeaponState.attack)
         {
@@ -113,17 +109,19 @@ public class WeaponMulti : Weapon
 
 
     [PunRPC]
-    protected override void PickUp()
+    protected void PickUp(int playerViewId)
     {
+        if (pickUpAllowed && player != null && GameObject.ReferenceEquals(player, PhotonView.Find(playerViewId).gameObject))
+        {
+            player.GetComponent<PhotonView>().RPC("PickUP", RpcTarget.AllBuffered, view.ViewID);
+            transform.SetParent(player.transform.GetChild(1).transform);
 
-        player.GetComponent<PhotonView>().RPC("PickUP", RpcTarget.AllBuffered, view.ViewID);
-        transform.SetParent(player.transform.GetChild(1).transform);
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            boxCollider2D.enabled = false;
 
-        boxCollider2D.enabled = false;
-
-        player = transform.parent.parent.gameObject;
+            player = transform.parent.parent.gameObject;
+        }
     }
 
     protected override IEnumerator AttackCo()

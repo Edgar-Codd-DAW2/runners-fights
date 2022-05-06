@@ -9,6 +9,7 @@ TagManager:
   - Teleporter
   - PlayerSpawner
   - PlayerCamera
+  - Weapon
   layers:
   - Default
   - TransparentFX

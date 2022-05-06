@@ -550,6 +550,7 @@ MonoBehaviour:
   playerCamera: {fileID: 6502139636730012290}
   usingLadder: 0
   view: {fileID: 0}
+  weaponView: {fileID: 0}
 --- !u!114 &2561027123881096094
 MonoBehaviour:
   m_ObjectHideFlags: 0

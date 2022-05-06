@@ -9,8 +9,8 @@ public class BulletScript : MonoBehaviour
     public float speed;
     public float damage;
     public float LastShoot;
-    private Rigidbody2D rigidbody2D;
-    private Vector3 direction;
+    public Rigidbody2D rigidbody2D;
+    public Vector3 direction;
     public Camera camera;
     public AudioClip hurt;
 
