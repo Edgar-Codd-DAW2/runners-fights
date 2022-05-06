@@ -22,10 +22,10 @@ public class DeathMulti : MonoBehaviour
     public void Respawn()
     {
         //this.gameObject.GetComponent<PlayerMovementMuli>().Respawn();
-        Transform[] spawnPoints = GameObject.FindWithTag("PlayerSpawner").transform.GetComponentsInChildren<Transform>();
+        //Transform[] spawnPoints = GameObject.FindWithTag("PlayerSpawner").transform.GetComponentsInChildren<Transform>();
 
-        int randomNumber = Random.Range(0, spawnPoints.Length);
-        Vector3 spawnPoint = spawnPoints[randomNumber].position;
+        //int randomNumber = Random.Range(0, spawnPoints.Length);
+        Vector3 spawnPoint = spawnPoints[0].position;
 
         player.GetComponent<PhotonView>().RPC("Respawn", RpcTarget.AllBuffered, spawnPoint);
         //GameObject.Find("MainCamera").GetComponent<Camera>().enabled = true;
