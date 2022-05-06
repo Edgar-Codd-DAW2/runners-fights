@@ -11,12 +11,15 @@ public class BulletScript : MonoBehaviour
     public float LastShoot;
     private Rigidbody2D rigidbody2D;
     private Vector3 direction;
+    public Camera camera;
 
     void Start()
     {
+        camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-       // Camera.main.GetComponent<AudioSource>().PlayOneShot(sound);
-       
+        camera.GetComponent<AudioSource>().PlayOneShot(sound);
+
+
     }
         
     private void FixedUpdate()

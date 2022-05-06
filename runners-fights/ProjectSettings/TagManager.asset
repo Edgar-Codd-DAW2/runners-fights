@@ -8,6 +8,7 @@ TagManager:
   - Ladder
   - Teleporter
   - PlayerSpawner
+  - PlayerCamera
   layers:
   - Default
   - TransparentFX
