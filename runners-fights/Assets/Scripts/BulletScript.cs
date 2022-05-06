@@ -71,7 +71,7 @@ public class BulletScript : MonoBehaviour
         {
             turrets.Hit(damage);
             camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
-            camera.GetComponent<AudioSource>().PlayOneShot(hurt);
+            camera.GetComponent<AudioSource>().PlayOneShot(sound);
         }
         if (collision.gameObject.layer != LayerMask.NameToLayer("Item") && !collision.gameObject.CompareTag("Ladder"))
         {
