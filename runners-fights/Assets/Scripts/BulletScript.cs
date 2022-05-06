@@ -18,7 +18,7 @@ public class BulletScript : MonoBehaviour
     {
         camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        camera.GetComponent<AudioSource>().PlayOneShot(sound);
+        camera.GetComponent<AudioSource>().PlayOneShot(hurt);
 
 
     }
