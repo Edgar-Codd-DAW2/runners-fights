@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 6502139636730012288}
   m_Layer: 3
   m_Name: PlayerCamera
-  m_TagString: Untagged
+  m_TagString: PlayerCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -454,13 +454,9 @@ MonoBehaviour:
   checkGround: {fileID: 6502139636683533228}
   arm: {fileID: 6502139637003696653}
   checkBoxSize: {x: 1.3, y: 0.2, z: 0}
-  attakRange: 0.25
   platformLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
   isMelee: 1
   attackRate: 0.5
   damage: 2
