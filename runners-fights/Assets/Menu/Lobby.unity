@@ -2774,6 +2774,7 @@ MonoBehaviour:
   lobbyPanel: {fileID: 250508015}
   roomPanel: {fileID: 1750337655}
   roomName: {fileID: 1494195172}
+  createButton: {fileID: 1318929421}
   roomItemPrefab: {fileID: 7790920088488928729, guid: 1bdd36c5616362e45a35d7532c0b7497,
     type: 3}
   contentObject: {fileID: 415962711}

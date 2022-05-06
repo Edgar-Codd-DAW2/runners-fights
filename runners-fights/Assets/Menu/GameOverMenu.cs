@@ -12,12 +12,6 @@ public class GameOverMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");

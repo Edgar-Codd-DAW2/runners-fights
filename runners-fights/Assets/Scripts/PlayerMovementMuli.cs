@@ -6,7 +6,8 @@ using Photon.Pun;
 
 public class PlayerMovementMuli : PlayerMovement
 {
-    PhotonView view;
+    private string lastPlayerToHit;
+    public PhotonView view;
    
     void Awake()
     {
@@ -34,7 +35,7 @@ public class PlayerMovementMuli : PlayerMovement
     //capturar input de teclado valores de 1 a -1
     void Update()
     {
-        if (view.IsMine)
+        if (view.IsMine && gameObject.GetComponent<CapsuleCollider2D>().enabled && healthBar.fillAmount > 0)
         {
             if (currentState != PlayerState.attack)
             {
@@ -99,6 +100,13 @@ public class PlayerMovementMuli : PlayerMovement
             {
                 StartCoroutine(DefendCo());
             }
+        } 
+        else if (view.IsMine)
+        {
+            gameOverUI.SetActive(true);
+        } else
+        {
+            gameOverUI.SetActive(false);
         }
     }
 
@@ -132,6 +140,7 @@ public class PlayerMovementMuli : PlayerMovement
         GameObject bullet = PhotonNetwork.Instantiate(bulletPreFab.name, arm.position + direction * 0.5f, Quaternion.identity);
         bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.AllBuffered, direction);
         bullet.GetComponent<PhotonView>().RPC("SetDamage", RpcTarget.AllBuffered, damage);
+        bullet.GetComponent<PhotonView>().RPC("SetOwner", RpcTarget.AllBuffered, PhotonNetwork.NickName);
     }
 
 
@@ -166,15 +175,21 @@ public class PlayerMovementMuli : PlayerMovement
     }
 
     [PunRPC]
-    public override void Hit(float amount)
+    public void Hit(float amount, string name)
     {
         if (currentState != PlayerState.defend)
         {
             healthBar.fillAmount -= amount / health / 10;
+            if (name != "")
+            {
+                Debug.Log("Hit by: " + name);
+                lastPlayerToHit = name;
+            }
 
             if (healthBar.fillAmount <= 0)
             {
-                view.RPC("SetSpectatorMode", RpcTarget.AllBuffered);
+                view.RPC("Die", RpcTarget.AllBuffered);
+                SendToRanking();
             }
         }
     }
@@ -184,22 +199,40 @@ public class PlayerMovementMuli : PlayerMovement
         PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
         if (playerView != null && collision.gameObject.CompareTag("Player"))
         {
-            playerView.RPC("Hit", RpcTarget.AllBuffered, damage);
+            playerView.RPC("Hit", RpcTarget.AllBuffered, damage, PhotonNetwork.NickName);
         }
     }
 
     [PunRPC]
-    private void SetSpectatorMode()
+    private void Die()
     {
-        rigidbody2D.gravityScale = 0;
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         transform.GetChild(2).gameObject.SetActive(false);
-        GetComponent<CapsuleCollider2D>().isTrigger = true;
-        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .5f);
+        GetComponent<Renderer>().enabled = false;
+        gameOverUI.SetActive(true);
+    }
+
+    public void SendToRanking()
+    {
+        Debug.Log("Killed by: " + lastPlayerToHit);
     }
 
     [PunRPC]
     protected override void playerPosition()
     {
         transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+    }
+
+    [PunRPC]
+    public void Respawn(Vector3 respwanPosition)
+    {
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        gameOverUI.SetActive(false);
+        transform.position = respwanPosition;
+        transform.GetChild(2).gameObject.SetActive(true);
+        healthBar.fillAmount = 1f;
+        GetComponent<Renderer>().enabled = true;
     }
 }
