@@ -71,8 +71,6 @@ public class Weapon : MonoBehaviour
                 {
                     Debug.Log(player);
                     player1.Hit(damage);
-                    camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
-                    camera.GetComponent<AudioSource>().PlayOneShot(hurt);
                 }
             }
 
