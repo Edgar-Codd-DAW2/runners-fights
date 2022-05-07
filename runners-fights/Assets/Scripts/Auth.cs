@@ -33,7 +33,7 @@ public class Auth : MonoBehaviour
         form.AddField("email", email.text);
         form.AddField("password", password.text);
 
-        UnityWebRequest www = UnityWebRequest.Post(/*TODO url de la api*/, form)
+        UnityWebRequest www = UnityWebRequest.Post(/*TODO url de la api*/ "", form);
 
         yield return www.Send();
 
