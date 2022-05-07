@@ -20,6 +20,7 @@ public class EquipMulti : Equip
             {
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
+                    weapon.GetComponent<PhotonView>().RPC("SetOwner", RpcTarget.AllBuffered, "");
                     weapon.GetComponent<PhotonView>().RPC("Drop", RpcTarget.AllBuffered);
                     weapon = null;
                 }
@@ -30,8 +31,9 @@ public class EquipMulti : Equip
     [PunRPC]
     public void SetWeaponMulti(int viewID)
     {
+        Debug.Log("Nickname equip: " + PhotonNetwork.NickName);
         weapon = PhotonView.Find(viewID).gameObject;
         weapon.transform.position = transform.position;
-        weapon.GetComponent<PhotonView>().RPC("SetOwner", RpcTarget.AllBuffered, PhotonNetwork.NickName);
+        //weapon.GetComponent<PhotonView>().RPC("SetOwner", RpcTarget.AllBuffered, PhotonNetwork.NickName);
     }
 }

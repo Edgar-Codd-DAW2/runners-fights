@@ -104,6 +104,7 @@ public class PlayerMovementMuli : PlayerMovement
 
             if (Input.GetKeyDown(KeyCode.E) && weaponView != null) {
                 weaponView.RPC("PickUp", RpcTarget.AllBuffered, view.ViewID);
+                weaponView.RPC("SetOwner", RpcTarget.AllBuffered, PhotonNetwork.NickName);
             }
         } 
         else if (view.IsMine)
@@ -245,6 +246,7 @@ public class PlayerMovementMuli : PlayerMovement
     [PunRPC]
     public void Respawn()
     {
+        lastPlayerToHit = "";
         gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         gameOverUI.SetActive(false);

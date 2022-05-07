@@ -44,7 +44,6 @@ public class WeaponMulti : Weapon
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("!!!!!!!!!!");
         if (currentState == WeaponState.attack)
         {
             PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
@@ -58,7 +57,6 @@ public class WeaponMulti : Weapon
             if (collision.gameObject.CompareTag("Player") && collision.transform.GetChild(1).GetComponent<Equip>().weapon == null)
             {
                 PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
-                Debug.Log("!?!?!?!?!?");
                 view.RPC("SetPlayerOwner", RpcTarget.AllBuffered, playerView.ViewID);
             }
         }
@@ -72,10 +70,10 @@ public class WeaponMulti : Weapon
         pickUpAllowed = true;
     }
 
-        [PunRPC]
+    [PunRPC]
     public void SetOwner(string newOwner)
     {
-        Debug.Log(owner);
+        Debug.Log("Owner: " + newOwner);
         owner = newOwner;
     }
 
