@@ -114,6 +114,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom(string roomName)
     {
+        lobbyPanel.SetActive(false);
         loadingPanel.SetActive(true);
         PhotonNetwork.JoinRoom(roomName);
     }
