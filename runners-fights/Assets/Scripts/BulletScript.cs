@@ -9,8 +9,8 @@ public class BulletScript : MonoBehaviour
     public float speed;
     public float damage;
     public float LastShoot;
-    public Rigidbody2D rigidbody2D;
-    public Vector3 direction;
+    private Rigidbody2D rigidbody2D;
+    private Vector3 direction;
     public Camera camera;
     public AudioClip hurt;
 
@@ -18,7 +18,7 @@ public class BulletScript : MonoBehaviour
     {
         camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        camera.GetComponent<AudioSource>().PlayOneShot(hurt);
+        camera.GetComponent<AudioSource>().PlayOneShot(sound);
 
 
     }
