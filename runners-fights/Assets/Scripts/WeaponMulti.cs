@@ -48,9 +48,8 @@ public class WeaponMulti : Weapon
         if (currentState == WeaponState.attack)
         {
             PhotonView playerView = collision.gameObject.GetComponent<PhotonView>();
-            if (playerView != null)
+            if (playerView != null && playerView.gameObject.CompareTag("Player"))
             {
-                Debug.Log(player);
                 playerView.RPC("Hit", RpcTarget.AllBuffered, damage, owner);
             }
         }

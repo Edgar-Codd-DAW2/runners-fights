@@ -41,10 +41,10 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
      void Update()
      {
-        /*if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
+        if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
         {
             PickUp();
-        }*/
+        }
 
         if (transform.parent == null)
         {

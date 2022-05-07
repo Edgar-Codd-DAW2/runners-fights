@@ -160,6 +160,10 @@ MonoBehaviour:
   speed: 10
   damage: 0
   LastShoot: 1
+  rigidbody2D: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  camera: {fileID: 0}
+  hurt: {fileID: 0}
 --- !u!114 &3687328515441223179
 MonoBehaviour:
   m_ObjectHideFlags: 0
