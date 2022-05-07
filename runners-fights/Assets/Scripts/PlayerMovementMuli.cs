@@ -224,11 +224,11 @@ public class PlayerMovementMuli : PlayerMovement
     [PunRPC]
     private void Die()
     {
+        Debug.Log("Died");
         gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         transform.GetChild(2).gameObject.SetActive(false);
         GetComponent<Renderer>().enabled = false;
-        gameOverUI.SetActive(true);
     }
 
     public void SendToRanking()
@@ -243,14 +243,17 @@ public class PlayerMovementMuli : PlayerMovement
     }
 
     [PunRPC]
-    public void Respawn(Vector3 respwanPosition)
+    public void Respawn()
     {
         gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         gameOverUI.SetActive(false);
-        transform.position = respwanPosition;
         transform.GetChild(2).gameObject.SetActive(true);
         healthBar.fillAmount = 1f;
         GetComponent<Renderer>().enabled = true;
+        Transform[] spawnPoints = GameObject.FindWithTag("Respawn").transform.GetComponentsInChildren<Transform>();
+        int randomNumber = Random.Range(0, spawnPoints.Length);
+        Vector3 spawnPoint = spawnPoints[randomNumber].position;
+        transform.position = spawnPoint;
     }
 }
