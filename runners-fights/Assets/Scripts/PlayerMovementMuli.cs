@@ -25,16 +25,13 @@ public class PlayerMovementMuli : PlayerMovement
 
     void Start()
     {
-        if (view.IsMine)
-        {
-            currentState = PlayerState.walk;
-            rigidbody2D = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
+        currentState = PlayerState.walk;
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
-            myRenderer = gameObject.GetComponent<SpriteRenderer>();
-            shaderGUItext = Shader.Find("GUI/Text Shader");
-            shaderSpritesDefault = Shader.Find("Sprites/Default");
-        }
+        myRenderer = gameObject.GetComponent<SpriteRenderer>();
+        shaderGUItext = Shader.Find("GUI/Text Shader");
+        shaderSpritesDefault = Shader.Find("Sprites/Default");
     }
     //capturar input de teclado valores de 1 a -1
     void Update()

@@ -41,9 +41,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject playerCamera;
 
-    protected SpriteRenderer myRenderer;
-    protected Shader shaderGUItext;
-    protected Shader shaderSpritesDefault;
+    public SpriteRenderer myRenderer;
+    public Shader shaderGUItext;
+    public Shader shaderSpritesDefault;
 
    
     public bool usingLadder = false;

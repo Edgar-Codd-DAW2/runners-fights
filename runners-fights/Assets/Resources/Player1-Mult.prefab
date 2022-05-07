@@ -464,6 +464,9 @@ MonoBehaviour:
   playerName: {fileID: 6330671634432855246}
   gameOverUI: {fileID: 2929028785065823912}
   playerCamera: {fileID: 1135482056}
+  myRenderer: {fileID: 0}
+  shaderGUItext: {fileID: 0}
+  shaderSpritesDefault: {fileID: 0}
   usingLadder: 0
   view: {fileID: 0}
   weaponView: {fileID: 0}
