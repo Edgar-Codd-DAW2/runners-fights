@@ -11,11 +11,10 @@ public class WeaponMulti : Weapon
     {
         view = GetComponent<PhotonView>();
 
-            currentState = WeaponState.idle;
+        currentState = WeaponState.idle;
 
-            boxCollider2D = GetComponent<BoxCollider2D>();
-            animator = GetComponent<Animator>();
-            timeToDestroy = 10f;
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame

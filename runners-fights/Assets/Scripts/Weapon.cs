@@ -13,7 +13,6 @@ public enum WeaponState : byte
 
 public class Weapon : MonoBehaviour
 {
-    // Start is called before the first frame update
     public WeaponState currentState;
     public bool pickUpAllowed;
     public GameObject player;
@@ -23,39 +22,23 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPreFab;
     public Transform bulletPosicion;
     public float damage;
-    public float timeToDestroy;
     public Camera camera;
     public AudioClip corte;
     public AudioClip hurt;
 
-    // Use this for initialization
     void Start()
     {
         currentState = WeaponState.idle;
 
         boxCollider2D = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-        timeToDestroy = 10f;
     }
 
-    // Update is called once per frame
      void Update()
      {
         if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
         {
             PickUp();
-        }
-
-        if (transform.parent == null)
-        {
-            /*if (timeToDestroy > 0)
-            {
-                timeToDestroy -= Time.deltaTime;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }*/
         }
      }
 
@@ -63,16 +46,7 @@ public class Weapon : MonoBehaviour
     {
         if (currentState == WeaponState.attack) 
         {
-            PlayerMovement player1 = collision.GetComponent<PlayerMovement>();
             TurretScript turrets = collision.GetComponent<TurretScript>();
-            if (player1 != null)
-            {
-                if (collision.gameObject != player)
-                {
-                    Debug.Log(player);
-                    player1.Hit(damage);
-                }
-            }
 
             if (turrets != null)
             {
@@ -135,7 +109,6 @@ public class Weapon : MonoBehaviour
         boxCollider2D.enabled = false;
 
         player = transform.parent.parent.gameObject;
-        //Destroy(gameObject);
     }
 
     [PunRPC]
@@ -144,7 +117,6 @@ public class Weapon : MonoBehaviour
         boxCollider2D.enabled = true;
         player = null;
         transform.parent = null;
-        timeToDestroy = 5f;
     }
 
     protected virtual IEnumerator AttackCo()
