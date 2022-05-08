@@ -138,6 +138,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public void OnClickLeaveRoom()
     {
+        stadium1ButtonText.text = "Stadio noche";
+        stadium2ButtonText.text = "Stadio día";
         stadium1Button.interactable = true;
         stadium2Button.interactable = true;
         PhotonNetwork.LeaveRoom(roomName);
