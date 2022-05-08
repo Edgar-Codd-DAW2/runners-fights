@@ -138,15 +138,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public void OnClickLeaveRoom()
     {
-        stadium1ButtonText.text = "Stadio noche";
-        stadium2ButtonText.text = "Stadio día";
-        stadium1Button.interactable = true;
-        stadium2Button.interactable = true;
         PhotonNetwork.LeaveRoom(roomName);
     }
 
     public override void OnLeftRoom()
     {
+        stadium1ButtonText.text = "Stadio noche";
+        stadium2ButtonText.text = "Stadio día";
         roomPanel.SetActive(false);
         lobbyPanel.SetActive(true);
   
@@ -154,6 +152,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        stadium1Button.interactable = true;
+        stadium2Button.interactable = true;
         PhotonNetwork.JoinLobby();
     }
 
