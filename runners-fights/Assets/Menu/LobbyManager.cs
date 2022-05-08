@@ -31,7 +31,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Transform playerItemParent;
 
     public GameObject playButton;
-    public Text buttonText;
+    public Text stadium1ButtonText;
+    public Text stadium2ButtonText;
 
     void Start()
     {
@@ -43,7 +44,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         } else
         {
             PhotonNetwork.JoinLobby();
-            lobbyPanel.SetActive(true);
             loadingPanel.SetActive(false);
         }
     }
@@ -68,12 +68,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void OnClickStadium1()
     {
         map = "Stadiummulti1";
+        stadium1ButtonText.text = "Creando...";
         CreateRoom();
     }
 
     public void OnClickStadium2()
     {
         map = "Stadiummulti2";
+        stadium2ButtonText.text = "Creando...";
         CreateRoom();
     }
 
@@ -83,7 +85,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             stadium1Button.interactable = false;
             stadium2Button.interactable = false;
-            buttonText.text = "Creando...";
             PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 4, BroadcastPropsChangeToAll = true });
         } else
         {
@@ -132,12 +133,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom(string roomName)
     {
-        lobbyPanel.SetActive(false);
         loadingPanel.SetActive(true);
         PhotonNetwork.JoinRoom(roomName);
     }
     public void OnClickLeaveRoom()
     {
+        stadium1Button.interactable = true;
+        stadium2Button.interactable = true;
         PhotonNetwork.LeaveRoom(roomName);
     }
 
@@ -201,7 +203,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             yield return null;
         }
-        lobbyPanel.SetActive(true);
         loadingPanel.SetActive(false);
     }
 }

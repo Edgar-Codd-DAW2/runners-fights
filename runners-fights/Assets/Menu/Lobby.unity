@@ -2866,7 +2866,8 @@ MonoBehaviour:
     type: 3}
   playerItemParent: {fileID: 968171884}
   playButton: {fileID: 1397346885}
-  buttonText: {fileID: 1724456516}
+  stadium1ButtonText: {fileID: 1724456516}
+  stadium2ButtonText: {fileID: 781775585}
 --- !u!4 &1932388591
 Transform:
   m_ObjectHideFlags: 0
