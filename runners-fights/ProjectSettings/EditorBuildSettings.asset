@@ -92,4 +92,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stadiummulti1.unity
     guid: 6c13c665ef237f448b08ecffd574efc4
+  - enabled: 1
+    path: Assets/Scenes/Mapa3.unity
+    guid: e6c25ba8a24db8a4d874e00affec73b8
   m_configObjects: {}
