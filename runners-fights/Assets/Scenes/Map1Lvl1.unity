@@ -3163,6 +3163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650970983}
   - component: {fileID: 1650970982}
+  - component: {fileID: 1650970984}
   - component: {fileID: 1650970981}
   m_Layer: 0
   m_Name: v-police
@@ -3180,7 +3181,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1650970980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8cfb275b7dd740438cf42b0f4a1236d, type: 3}
+  m_Script: {fileID: 11500000, guid: 935636dcf8a925444a3a7b7df704ca14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &1650970982
@@ -3248,6 +3249,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1650970984
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650970980}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.63, y: 0.6}
+    newSize: {x: 1.63, y: 0.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.63, y: 0.6}
+  m_EdgeRadius: 0
 --- !u!4 &1654313398 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1563965039580745103, guid: 94033351a745d7a4b8d3f928eecdf3b4,
@@ -55434,12 +55461,12 @@ PrefabInstance:
     - target: {fileID: 6502139637302142136, guid: b020823bc6aa9154694239d3d40fdb2a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11
+      value: 60.3
       objectReference: {fileID: 0}
     - target: {fileID: 6502139637302142136, guid: b020823bc6aa9154694239d3d40fdb2a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.8
+      value: 18.3
       objectReference: {fileID: 0}
     - target: {fileID: 6502139637302142136, guid: b020823bc6aa9154694239d3d40fdb2a,
         type: 3}
@@ -55485,6 +55512,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Keko
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574629684256747982, guid: b020823bc6aa9154694239d3d40fdb2a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.009246826
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574629684256747982, guid: b020823bc6aa9154694239d3d40fdb2a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.8500004
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611080312694384726, guid: b020823bc6aa9154694239d3d40fdb2a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.009246826
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b020823bc6aa9154694239d3d40fdb2a, type: 3}

@@ -9,7 +9,7 @@ public class passLvl3 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("Mapa 3");
+            SceneManager.LoadScene("Mapa3");
         }
     }
 }
