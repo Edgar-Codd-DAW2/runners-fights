@@ -67,29 +67,29 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickStadium1()
     {
-        map = "Stadiummulti1";
-        stadium1ButtonText.text = "Creando...";
-        CreateRoom();
+        if (roomInputField.text.Length >= 1)
+        {
+            map = "Stadiummulti1";
+            stadium1ButtonText.text = "Creando...";
+            CreateRoom();
+        }
     }
 
     public void OnClickStadium2()
     {
-        map = "Stadiummulti2";
-        stadium2ButtonText.text = "Creando...";
-        CreateRoom();
+        if (roomInputField.text.Length >= 1)
+        {
+            map = "Stadiummulti2";
+            stadium2ButtonText.text = "Creando...";
+            CreateRoom();
+        }
     }
 
     private void CreateRoom()
     {
-        if (roomInputField.text.Length >= 1)
-        {
-            stadium1Button.interactable = false;
-            stadium2Button.interactable = false;
-            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 4, BroadcastPropsChangeToAll = true });
-        } else
-        {
-            map = "";
-        }
+        stadium1Button.interactable = false;
+        stadium2Button.interactable = false;
+        PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 4, BroadcastPropsChangeToAll = true });
     }
 
     public void OnClickLeaveLobby()
