@@ -15,7 +15,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject lobbyPanel;
     public GameObject roomPanel;
     public Text roomName;
-    public Button createButton;
+    public Button stadium1Button;
+    public Button stadium2Button;
+    public string map;
 
     public RoomItem roomItemPrefab;
     List<RoomItem> roomItemList = new List<RoomItem>();
@@ -63,13 +65,29 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
     }*/
 
-    public void OnClickCreate()
+    public void OnClickStadium1()
+    {
+        map = "Stadiummulti1";
+        CreateRoom();
+    }
+
+    public void OnClickStadium2()
+    {
+        map = "Stadiummulti2";
+        CreateRoom();
+    }
+
+    private void CreateRoom()
     {
         if (roomInputField.text.Length >= 1)
         {
-            createButton.interactable = false;
+            stadium1Button.interactable = false;
+            stadium2Button.interactable = false;
             buttonText.text = "Creando...";
-            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions(){ MaxPlayers = 4, BroadcastPropsChangeToAll = true });
+            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 4, BroadcastPropsChangeToAll = true });
+        } else
+        {
+            map = "";
         }
     }
 
@@ -174,7 +192,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickPlayButton()
     {
-        PhotonNetwork.LoadLevel("Stadiummulti1");
+        PhotonNetwork.LoadLevel(map);
     }
 
     IEnumerator Reconnect()
