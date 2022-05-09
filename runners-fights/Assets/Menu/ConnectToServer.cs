@@ -13,6 +13,14 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.NickName = user;
         PhotonNetwork.AutomaticallySyncScene = true;
+        
+        if (user == "admin@admin.com")
+        {
+            PlayerPrefs.SetInt(user, 4);
+        } else if (!PlayerPrefs.HasKey(user))
+        {
+            PlayerPrefs.SetInt(user, 1);
+        }
         PhotonNetwork.ConnectUsingSettings();
     }
 

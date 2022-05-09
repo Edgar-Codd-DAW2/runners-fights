@@ -466,6 +466,9 @@ MonoBehaviour:
   playerName: {fileID: 6574629684256747981}
   gameOverUI: {fileID: 0}
   playerCamera: {fileID: 6502139636730012290}
+  myRenderer: {fileID: 0}
+  shaderGUItext: {fileID: 0}
+  shaderSpritesDefault: {fileID: 0}
   usingLadder: 0
 --- !u!95 &6502139637302142132
 Animator:
@@ -615,6 +618,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036714206752034426, guid: 3cba60790444d7840b26236d7f0ea14c,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8036714206752034427, guid: 3cba60790444d7840b26236d7f0ea14c,
         type: 3}

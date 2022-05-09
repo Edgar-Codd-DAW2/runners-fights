@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+
 
 public class passLvl3 : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class passLvl3 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            PlayerPrefs.SetInt(PhotonNetwork.NickName, 3);
             SceneManager.LoadScene("Mapa3");
         }
     }

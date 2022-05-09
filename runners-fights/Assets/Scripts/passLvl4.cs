@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class passLvl4 : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class passLvl4 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            PlayerPrefs.SetInt(PhotonNetwork.NickName, 4);
             SceneManager.LoadScene("Mapa4");
         }
     }
