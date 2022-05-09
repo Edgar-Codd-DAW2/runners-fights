@@ -8,18 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
-    public InputField usernameInput;
-    public Text buttonText;
     // Start is called before the first frame update
-    public void OnClickConnect()
+    public void OnClickConnect(string user)
     {
-        if (usernameInput.text.Length >= 1)
-        {
-            PhotonNetwork.NickName = usernameInput.text;
-            buttonText.text = "Conectando...";
-            PhotonNetwork.AutomaticallySyncScene = true;
-            PhotonNetwork.ConnectUsingSettings();
-        }
+        PhotonNetwork.NickName = user;
+        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()

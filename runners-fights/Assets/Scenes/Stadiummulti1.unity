@@ -3951,7 +3951,7 @@ GameObject:
   - component: {fileID: 1416517086}
   m_Layer: 0
   m_Name: SpawnPoints
-  m_TagString: PlayerSpawner
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4054,7 +4054,7 @@ GameObject:
   - component: {fileID: 1587010678}
   m_Layer: 0
   m_Name: Ranking
-  m_TagString: Untagged
+  m_TagString: Ranking
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

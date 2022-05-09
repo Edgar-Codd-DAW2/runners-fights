@@ -235,6 +235,10 @@ public class PlayerMovementMuli : PlayerMovement
     public void SendToRanking()
     {
         Debug.Log("Killed by: " + lastPlayerToHit);
+        if (!string.IsNullOrEmpty(lastPlayerToHit))
+        {
+            GameObject.FindWithTag("Ranking").gameObject.GetComponent<Ranking>().SendToRanking(lastPlayerToHit);
+        }
     }
 
     [PunRPC]

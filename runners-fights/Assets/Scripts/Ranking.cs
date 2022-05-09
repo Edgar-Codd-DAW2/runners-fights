@@ -16,9 +16,10 @@ public class Ranking : MonoBehaviour
 
     public void SendToRanking(string playerEmail)
     {
-        //disabled el boton hasta que rellene campos
         email = playerEmail;
-        StartCoroutine(UpdateRankingCo());
+
+        Debug.Log("Update " + playerEmail + " ranking's");
+        //StartCoroutine(UpdateRankingCo());
     }
 
     IEnumerator UpdateRankingCo()
