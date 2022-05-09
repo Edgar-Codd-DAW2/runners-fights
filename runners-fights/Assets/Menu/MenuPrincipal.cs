@@ -24,7 +24,12 @@ public class MenuPrincipal : MonoBehaviour
     public void SegundoNivel()
     {
         //Debug.Log("Clickas A Primer Mapa");
-        SceneManager.LoadScene("mapa roger 1");
+        SceneManager.LoadScene("Mapa3");
+    }
+    public void TercerNivel()
+    {
+        //Debug.Log("Clickas A Primer Mapa");
+        SceneManager.LoadScene("Mapa4");
     }
     public void EmpezarMultiplayer()
     {
