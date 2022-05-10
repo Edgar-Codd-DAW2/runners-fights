@@ -74,20 +74,11 @@ public class PlayerMovement : MonoBehaviour
                 transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             }
 
-            
-            playerPosition();
+
+            PlayerPosition();
 
             animator.SetBool("running", horizontal != 0.0f);
         }
-
-        /*Debug.DrawRay(transform.position, Vector3.down * 2.2f, Color.red);
-        if (Physics2D.Raycast(transform.position, Vector3.down, 2.2f)) 
-        {
-            grounded = true;
-        } else {
-
-            grounded = false;
-        }*/
 
 
         grounded = Physics2D.OverlapBox(checkGround.position, checkBoxSize, 0f, platformLayerMask);
@@ -135,25 +126,10 @@ public class PlayerMovement : MonoBehaviour
     protected void Jump() 
     {
         rigidbody2D.AddForce(Vector2.up * jumpForce);
-
-
-        //animator.SetFloat("speed", rigidbody2D.velocity.y);
     }
-    /*private void Attack()
-    {
-        animator.SetTrigger("attack");
-
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(arm.position, attakRange, enemyLayerMask);
-    
-        foreach(Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("Hit");
-        }
-    }*/
 
     public void PickUP(GameObject weapon)
     {
-        //GameObject cpWeapon = Instantiate(weapon, arm.position, Quaternion.identity);
         arm.GetComponent<Equip>().SetWeapon(weapon);
     }
 
@@ -162,9 +138,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction;
         if (transform.localScale.x == 1.0f) direction = Vector2.right;
         else direction = Vector2.left;
-
-        /*GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
-        bullet.GetComponent<BulletScript>().SetDirection(direction);*/
 
         GameObject bullet = Instantiate(bulletPreFab, arm.position + direction * 0.5f, Quaternion.identity);
 
@@ -189,20 +162,6 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.walk;
     }
 
-    /*
-    protected void whiteSprite()
-    {
-        myRenderer.material.shader = shaderGUItext;
-        myRenderer.color = Color.white;
-    }*/
-
-    /*protected void normalSprite()
-    {
-        myRenderer.material.shader = shaderSpritesDefault;
-        myRenderer.color = Color.white;
-    }*/
-
-
     public virtual void Hit(float amount)
     {
         if (currentState != PlayerState.defend)
@@ -226,12 +185,7 @@ public class PlayerMovement : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerMovement player = collision.GetComponent<PlayerMovement>();
         TurretScript turrets = collision.GetComponent<TurretScript>();
-        if (player != null)
-        {
-            player.Hit(damage);
-        }
 
         if (turrets != null)
         {
@@ -249,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    protected virtual void playerPosition()
+    protected virtual void PlayerPosition()
     {
         transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
     }

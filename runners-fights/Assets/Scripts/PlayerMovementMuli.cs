@@ -52,7 +52,7 @@ public class PlayerMovementMuli : PlayerMovement
                 }
 
                 
-                 view.RPC("playerPosition", RpcTarget.AllBuffered);
+                 view.RPC("PlayerPosition", RpcTarget.AllBuffered);
 
                 animator.SetBool("running", horizontal != 0.0f);
             }
@@ -242,7 +242,7 @@ public class PlayerMovementMuli : PlayerMovement
     }
 
     [PunRPC]
-    protected override void playerPosition()
+    protected override void PlayerPosition()
     {
         transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
     }
