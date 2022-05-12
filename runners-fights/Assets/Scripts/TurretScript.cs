@@ -50,7 +50,6 @@ public class TurretScript : MonoBehaviour
   
     public void Hit(float amount)
     {
-        //Camera.main.GetComponent<AudioSource>().PlayOneShot(hurtSound);
         health -= amount;
         if (health <= 0) Destroy(gameObject);
     }
