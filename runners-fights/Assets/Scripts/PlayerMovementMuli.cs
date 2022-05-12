@@ -119,7 +119,7 @@ public class PlayerMovementMuli : PlayerMovement
     [PunRPC]
     public void SlashSound()
     {
-        playerCamera.GetComponent<Camera>().GetComponent<AudioSource>().PlayOneShot(slash);
+        GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>().GetComponent<AudioSource>().PlayOneShot(slash);
     }
 
 
@@ -178,8 +178,7 @@ public class PlayerMovementMuli : PlayerMovement
     {
         if (currentState != PlayerState.defend)
         {
-            playerCamera.GetComponent<Camera>();
-            playerCamera.GetComponent<AudioSource>().PlayOneShot(hurt);
+            GameObject.FindWithTag("PlayerCamera").GetComponent<AudioSource>().PlayOneShot(hurt);
 
             healthBar.fillAmount -= amount / health / 10;
             if (name != "")

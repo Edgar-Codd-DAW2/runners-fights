@@ -95,11 +95,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 65e00fd61c888164db9962202cc08eb0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -395,12 +395,15 @@ MonoBehaviour:
   isMelee: 0
   attackRate: 0.25
   damage: 1
-  hurtSound: {fileID: 0}
   health: 5
   healthBar: {fileID: 0}
   playerName: {fileID: 645484795816282355}
   gameOverUI: {fileID: 0}
   playerCamera: {fileID: 1135482056}
+  slash: {fileID: 0}
+  myRenderer: {fileID: 0}
+  shaderGUItext: {fileID: 0}
+  shaderSpritesDefault: {fileID: 0}
   usingLadder: 0
 --- !u!95 &309670954879934945
 Animator:
