@@ -9,7 +9,6 @@ public class CameraScript : MonoBehaviour
     public GameObject personaje;
     private Vector3 posicionRelativa;
 
-    // Use this for initialization
     void Start()
     {
 

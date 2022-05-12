@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
 
     public virtual void Hit(float amount)
     {
-        if (currentState != PlayerState.defend)
+        if (currentState != PlayerState.defend || healthBar.fillAmount == 0)
         {
             healthBar.fillAmount -= amount / health / 10;
 

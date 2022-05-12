@@ -176,7 +176,7 @@ public class PlayerMovementMuli : PlayerMovement
     [PunRPC]
     public void Hit(float amount, string name)
     {
-        if (currentState != PlayerState.defend)
+        if (currentState != PlayerState.defend || name == "")
         {
             GameObject.FindWithTag("PlayerCamera").GetComponent<AudioSource>().PlayOneShot(hurt);
 
