@@ -458,18 +458,19 @@ MonoBehaviour:
   isMelee: 0
   attackRate: 0.25
   damage: 1
-  hurtSound: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
   health: 5
   healthBar: {fileID: 1444267155003411699}
   playerName: {fileID: 6330671634432855246}
   gameOverUI: {fileID: 2929028785065823912}
   playerCamera: {fileID: 1135482056}
+  slash: {fileID: 8300000, guid: 747b66acea059b94c94fcb0f0f91220d, type: 3}
   myRenderer: {fileID: 0}
   shaderGUItext: {fileID: 0}
   shaderSpritesDefault: {fileID: 0}
   usingLadder: 0
   view: {fileID: 0}
   weaponView: {fileID: 0}
+  hurt: {fileID: 8300000, guid: 4168ac081f2c51d4e828ec7493c53bf7, type: 3}
 --- !u!95 &309670954879934945
 Animator:
   serializedVersion: 3

@@ -163,9 +163,8 @@ MonoBehaviour:
   bulletPreFab: {fileID: 0}
   bulletPosicion: {fileID: 0}
   damage: 3
-  timeToDestroy: 0
   camera: {fileID: 0}
-  corte: {fileID: 0}
+  corte: {fileID: 8300000, guid: 747b66acea059b94c94fcb0f0f91220d, type: 3}
   hurt: {fileID: 0}
   view: {fileID: 0}
   owner: 

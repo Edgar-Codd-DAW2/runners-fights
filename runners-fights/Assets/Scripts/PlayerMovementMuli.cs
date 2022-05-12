@@ -9,7 +9,8 @@ public class PlayerMovementMuli : PlayerMovement
     private string lastPlayerToHit;
     public PhotonView view;
     public PhotonView weaponView;
-   
+    public AudioClip hurt;
+
     void Awake()
     {
         view = GetComponent<PhotonView>();
@@ -33,7 +34,7 @@ public class PlayerMovementMuli : PlayerMovement
         shaderGUItext = Shader.Find("GUI/Text Shader");
         shaderSpritesDefault = Shader.Find("Sprites/Default");
     }
-    //capturar input de teclado valores de 1 a -1
+
     void Update()
     {
         if (view.IsMine && gameObject.GetComponent<CapsuleCollider2D>().enabled && healthBar.fillAmount > 0)
@@ -57,16 +58,6 @@ public class PlayerMovementMuli : PlayerMovement
                 animator.SetBool("running", horizontal != 0.0f);
             }
 
-            /*Debug.DrawRay(transform.position, Vector3.down * 2.2f, Color.red);
-            if (Physics2D.Raycast(transform.position, Vector3.down, 2.2f)) 
-            {
-                grounded = true;
-            } else {
-
-                grounded = false;
-            }*/
-
-
             grounded = Physics2D.OverlapBox(checkGround.position, checkBoxSize, 0f, platformLayerMask);
 
 
@@ -87,6 +78,7 @@ public class PlayerMovementMuli : PlayerMovement
                 {
                     if (isMelee)
                     {
+                        view.RPC("SlashSound", RpcTarget.AllBuffered);
                         StartCoroutine(AttackCo());
                     }
                     else
@@ -124,22 +116,16 @@ public class PlayerMovementMuli : PlayerMovement
         }
     }
 
-    /*private void Attack()
+    [PunRPC]
+    public void SlashSound()
     {
-        animator.SetTrigger("attack");
+        playerCamera.GetComponent<Camera>().GetComponent<AudioSource>().PlayOneShot(slash);
+    }
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(arm.position, attakRange, enemyLayerMask);
-    
-        foreach(Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("Hit");
-        }
-    }*/
 
     [PunRPC]
     public void PickUP(int viewID)
     {
-        //GameObject cpWeapon = Instantiate(weapon, arm.position, Quaternion.identity);
         arm.GetComponent<PhotonView>().RPC("SetWeaponMulti", RpcTarget.AllBuffered, viewID);
     }
 
@@ -149,8 +135,6 @@ public class PlayerMovementMuli : PlayerMovement
         if (transform.localScale.x == 1.0f) direction = Vector2.right;
         else direction = Vector2.left;
 
-        /*GameObject bullet = Instantiate(bulletPreFab, transform.position + direction * 0.5f, Quaternion.identity);
-        bullet.GetComponent<BulletScript>().SetDirection(direction);*/
 
         GameObject bullet = PhotonNetwork.Instantiate(bulletPreFab.name, arm.position + direction * 0.5f, Quaternion.identity);
         bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.AllBuffered, direction);
@@ -194,6 +178,9 @@ public class PlayerMovementMuli : PlayerMovement
     {
         if (currentState != PlayerState.defend)
         {
+            playerCamera.GetComponent<Camera>();
+            playerCamera.GetComponent<AudioSource>().PlayOneShot(hurt);
+
             healthBar.fillAmount -= amount / health / 10;
             if (name != "")
             {

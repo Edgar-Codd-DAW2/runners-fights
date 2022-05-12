@@ -460,12 +460,12 @@ MonoBehaviour:
   isMelee: 1
   attackRate: 0.5
   damage: 2
-  hurtSound: {fileID: 8300000, guid: 11a8d633e545ce248b4809bb53780b38, type: 3}
   health: 10
   healthBar: {fileID: 1796311458357817840}
   playerName: {fileID: 6574629684256747981}
   gameOverUI: {fileID: 0}
   playerCamera: {fileID: 6502139636730012290}
+  slash: {fileID: 8300000, guid: 747b66acea059b94c94fcb0f0f91220d, type: 3}
   myRenderer: {fileID: 0}
   shaderGUItext: {fileID: 0}
   shaderSpritesDefault: {fileID: 0}

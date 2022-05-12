@@ -17,28 +17,8 @@ public class WeaponMulti : Weapon
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (view.IsMine)
-        {
-            /*if (pickUpAllowed && Input.GetKeyDown(KeyCode.E) && player != null)
-            {
-                view.RPC("PickUp", RpcTarget.AllBuffered);
-            }*/
-
-            if (transform.parent == null)
-            {
-                /*if (timeToDestroy > 0)
-                {
-                    timeToDestroy -= Time.deltaTime;
-                }
-                else
-                {
-                    Destroy(gameObject);
-                }*/
-            }
-        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -62,7 +42,7 @@ public class WeaponMulti : Weapon
        
     }
 
-    [PunRPC]
+        [PunRPC]
     public void SetPlayerOwner(int playerViewId)
     {
         player = PhotonView.Find(playerViewId).gameObject;
@@ -81,6 +61,8 @@ public class WeaponMulti : Weapon
     {
         if (isMelee)
         {
+            camera = GameObject.FindWithTag("PlayerCamera").GetComponent<Camera>();
+            camera.GetComponent<AudioSource>().PlayOneShot(corte);
             StartCoroutine(AttackCo());
         }
         else

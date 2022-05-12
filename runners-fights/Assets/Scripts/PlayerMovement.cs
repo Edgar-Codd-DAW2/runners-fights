@@ -34,12 +34,12 @@ public class PlayerMovement : MonoBehaviour
     public bool isMelee;
     public float attackRate;
     public float damage;
-    public AudioClip hurtSound;
     public float health;
     public Image healthBar;
     public Text playerName;
     public GameObject gameOverUI;
     public GameObject playerCamera;
+    public AudioClip slash;
 
     public SpriteRenderer myRenderer;
     public Shader shaderGUItext;
@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         shaderGUItext = Shader.Find("GUI/Text Shader");
         shaderSpritesDefault = Shader.Find("Sprites/Default");
     }
-    //capturar input de teclado valores de 1 a -1
+
     void Update()
     {
         if (currentState != PlayerState.attack)
@@ -101,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (isMelee)
                 {
+                    playerCamera.GetComponent<Camera>().GetComponent<AudioSource>().PlayOneShot(slash);
                     StartCoroutine(AttackCo());
                 }
                 else

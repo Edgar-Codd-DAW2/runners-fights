@@ -152,12 +152,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  pickUpAllowed: 0
   player: {fileID: 0}
+  boxCollider2D: {fileID: 0}
   animator: {fileID: 0}
   isMelee: 1
   bulletPreFab: {fileID: 0}
   bulletPosicion: {fileID: 0}
   damage: 3
+  camera: {fileID: 0}
+  corte: {fileID: 8300000, guid: 747b66acea059b94c94fcb0f0f91220d, type: 3}
+  hurt: {fileID: 0}
 --- !u!50 &7799753934130167950
 Rigidbody2D:
   serializedVersion: 4
