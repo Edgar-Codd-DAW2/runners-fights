@@ -29,7 +29,7 @@ public class Ranking : MonoBehaviour
 
         form.AddField("email", email);
 
-        //byte[] myData = System.Text.Encoding.UTF8.GetBytes(emai);
+        /*//byte[] myData = System.Text.Encoding.UTF8.GetBytes(emai);
         //UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData);
 
         Debug.Log("{\"email\":\"" + email + "\"}");
@@ -40,7 +40,9 @@ public class Ranking : MonoBehaviour
         string str = "{\"email\":\"" + email + "\"}";
         JObject json = JObject.Parse(str);
         //byte[] myData = System.Text.Encoding.UTF8.GetBytes("{\"email\":\"" + email + "\"}");
-        byte[] myData = json.Properties().Select(p => (byte)p.Value).ToArray();
+        byte[] myData = json.Properties().Select(p => (byte)p.Value).ToArray();*/
+
+        byte[] myData = System.Text.Encoding.UTF8.GetBytes(email);
         using (UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData))
         {
             yield return www.SendWebRequest();
