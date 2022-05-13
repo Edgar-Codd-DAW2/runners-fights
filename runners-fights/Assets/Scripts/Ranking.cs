@@ -42,15 +42,18 @@ public class Ranking : MonoBehaviour
         //byte[] myData = System.Text.Encoding.UTF8.GetBytes("{\"email\":\"" + email + "\"}");
         byte[] myData = json.Properties().Select(p => (byte)p.Value).ToArray();*/
 
-        string str = "{\"email\":\"" + email + "\"}";
+        /*string str = "{\"email\":\"" + email + "\"}";
         JObject json = JObject.Parse(str);
         Debug.Log(json);
         string jsonString = JsonUtility.ToJson(json) ?? "";
         Debug.Log(jsonString);
         byte[] myData = System.Text.Encoding.UTF8.GetBytes("admin@admin.com");
-        form.AddField("email", email);
+        form.AddField("email", email);*/
+
+        Debug.Log(form.data);
         byte[] rawData = form.data;
 
+        Debug.Log(rawData);
         UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", rawData);
         
         www.SetRequestHeader("Content-Type", "application/json");
