@@ -47,8 +47,8 @@ public class Ranking : MonoBehaviour
         Debug.Log(json);
         string jsonString = JsonUtility.ToJson(json) ?? "";
         Debug.Log(jsonString);
-        byte[] myData = System.Text.Encoding.UTF8.GetBytes(email);
-        UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", jsonString);
+        byte[] myData = System.Text.Encoding.UTF8.GetBytes("admin@admin.com");
+        UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData);
         
         www.SetRequestHeader("Content-Type", "application/json");
         yield return www.SendWebRequest();
