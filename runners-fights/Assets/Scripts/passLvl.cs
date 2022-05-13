@@ -28,7 +28,7 @@ public class passLvl : MonoBehaviour
 
         form.AddField("email", email);
         form.AddField("level", 2);
-        UnityWebRequest www = UnityWebRequest.Post(/*TODO API URL*/"", form);
+        UnityWebRequest www = UnityWebRequest.Put(/*TODO API URL*/"", "'email' : '" + email + "'");
 
         yield return www.Send();
 

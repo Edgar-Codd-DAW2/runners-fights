@@ -28,7 +28,7 @@ public class Ranking : MonoBehaviour
 
         form.AddField("email", email);
 
-        UnityWebRequest www = UnityWebRequest.Post(/*TODO url de la api*/ "", form);
+        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8080/api/kills", "{'email' :'" + email + "'}");
 
         yield return www.Send();
 

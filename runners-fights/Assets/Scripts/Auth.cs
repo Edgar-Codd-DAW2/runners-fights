@@ -30,10 +30,10 @@ public class Auth : MonoBehaviour
 
 
             //TODO url de la api
-            //StartCoroutine(Login());
+            StartCoroutine(Login());
 
             //Temporal until StartCoroutine(Login()) is terminated
-            connecToPhoton.OnClickConnect(email.text);
+            //connecToPhoton.OnClickConnect(email.text);
         }
     }
 
@@ -44,7 +44,7 @@ public class Auth : MonoBehaviour
         form.AddField("email", email.text);
         form.AddField("password", password.text);
 
-        UnityWebRequest www = UnityWebRequest.Post(/*TODO url de la api*/ "", form);
+        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8080/api/login", form);
 
         yield return www.Send();
 
@@ -57,6 +57,7 @@ public class Auth : MonoBehaviour
         else
         {
             Debug.Log("Form upload complete!");
+            Debug.Log(www.downloadHandler.text);
             connecToPhoton.OnClickConnect(email.text);
         }
 
