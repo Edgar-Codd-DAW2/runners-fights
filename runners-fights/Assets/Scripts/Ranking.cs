@@ -28,22 +28,24 @@ public class Ranking : MonoBehaviour
 
         form.AddField("email", email);
 
-        byte[] myData = System.Text.Encoding.UTF8.GetBytes(email);
-        using (UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData))
+        //byte[] myData = System.Text.Encoding.UTF8.GetBytes(emai);
+        //UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData);
+
+        UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", "{\"email\":\"" + email + "\"}");
+        //www.SetRequestHeader("Content-Type", "application/json");
+
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError)
         {
-            yield return www.SendWebRequest();
+            Debug.Log(www.error);
+            Debug.Log("peto");
 
-            if (www.isNetworkError)
-            {
-                Debug.Log(www.error);
-                Debug.Log("peto");
-
-            }
-            else
-            {
-                Debug.Log("+1");
-                Debug.Log(www.downloadHandler.text);
-            }
-        };
+        }
+        else
+        {
+            Debug.Log("+1");
+            Debug.Log(www.downloadHandler.text);
+        }
     }
 }
