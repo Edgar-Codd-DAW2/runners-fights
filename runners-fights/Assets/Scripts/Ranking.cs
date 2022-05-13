@@ -42,22 +42,27 @@ public class Ranking : MonoBehaviour
         //byte[] myData = System.Text.Encoding.UTF8.GetBytes("{\"email\":\"" + email + "\"}");
         byte[] myData = json.Properties().Select(p => (byte)p.Value).ToArray();*/
 
+        string str = "{\"email\":\"" + email + "\"}";
+        JObject json = JObject.Parse(str);
+        Debug.Log(json);
+        string jsonString = JsonUtility.ToJson(json) ?? "";
+        Debug.Log(jsonString);
         byte[] myData = System.Text.Encoding.UTF8.GetBytes(email);
-        using (UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData))
-        {
-            yield return www.SendWebRequest();
+        UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", jsonString);
+        
+        www.SetRequestHeader("Content-Type", "application/json");
+        yield return www.SendWebRequest();
 
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                
-                Debug.Log("+1!");
-                Debug.Log(www.downloadHandler.text);
-            }
-            Debug.Log(www.responseCode);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
         }
+        else
+        {
+                
+            Debug.Log("+1!");
+            Debug.Log(www.downloadHandler.text);
+        }
+        Debug.Log(www.responseCode);
     }
 }
