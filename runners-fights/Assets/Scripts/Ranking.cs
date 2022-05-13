@@ -33,21 +33,25 @@ public class Ranking : MonoBehaviour
 
         Debug.Log("{\"email\":\"" + email + "\"}");
 
-        UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", "{\"email\":\"" + email + "\"}");
+        //UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", "{\"email\":\"" + email + "\"}");
         //www.SetRequestHeader("Content-Type", "application/json");
 
-        yield return www.SendWebRequest();
-
-        if (www.isNetworkError)
+        byte[] myData = System.Text.Encoding.UTF8.GetBytes("{\"email\":\"" + email + "\"}");
+        using (UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData))
         {
-            Debug.Log(www.error);
-            Debug.Log("peto");
+            yield return www.SendWebRequest();
 
-        }
-        else
-        {
-            Debug.Log("+1");
-            Debug.Log(www.downloadHandler.text);
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                
+                Debug.Log("+1!");
+                Debug.Log(www.downloadHandler.text);
+            }
+            Debug.Log(www.responseCode);
         }
     }
 }
