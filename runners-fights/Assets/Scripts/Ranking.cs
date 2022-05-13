@@ -31,6 +31,8 @@ public class Ranking : MonoBehaviour
         //byte[] myData = System.Text.Encoding.UTF8.GetBytes(emai);
         //UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData);
 
+        Debug.Log("{\"email\":\"" + email + "\"}");
+
         UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", "{\"email\":\"" + email + "\"}");
         //www.SetRequestHeader("Content-Type", "application/json");
 
