@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine.Networking;
+using Newtonsoft.Json.Linq;
 
 public class Ranking : MonoBehaviour
 {
@@ -36,7 +37,10 @@ public class Ranking : MonoBehaviour
         //UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", "{\"email\":\"" + email + "\"}");
         //www.SetRequestHeader("Content-Type", "application/json");
 
-        byte[] myData = System.Text.Encoding.UTF8.GetBytes("{\"email\":\"" + email + "\"}");
+        string str = "{\"email\":\"" + email + "\"}";
+        JObject json = JObject.Parse(str);
+        //byte[] myData = System.Text.Encoding.UTF8.GetBytes("{\"email\":\"" + email + "\"}");
+        byte[] myData = json.Properties().Select(p => (byte)p.Value).ToArray();
         using (UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData))
         {
             yield return www.SendWebRequest();
