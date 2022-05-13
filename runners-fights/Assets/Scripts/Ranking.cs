@@ -50,14 +50,13 @@ public class Ranking : MonoBehaviour
         byte[] myData = System.Text.Encoding.UTF8.GetBytes("admin@admin.com");
         form.AddField("email", email);*/
 
-        Debug.Log(form.data);
-        byte[] rawData = form.data;
+        //Debug.Log(form.data);
+        //byte[] rawData = form.data;
 
-        Debug.Log(rawData);
-        UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", rawData);
+        //Debug.Log(rawData);
+        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8080/api/kills", form);
         
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
+        yield return www.Send();
 
         if (www.result != UnityWebRequest.Result.Success)
         {
