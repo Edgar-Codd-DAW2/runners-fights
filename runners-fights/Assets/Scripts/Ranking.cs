@@ -19,7 +19,7 @@ public class Ranking : MonoBehaviour
         email = playerEmail;
 
         Debug.Log("Update " + playerEmail + " ranking's");
-        //StartCoroutine(UpdateRankingCo());
+        StartCoroutine(UpdateRankingCo());
     }
 
     IEnumerator UpdateRankingCo()
@@ -29,21 +29,21 @@ public class Ranking : MonoBehaviour
         form.AddField("email", email);
 
         byte[] myData = System.Text.Encoding.UTF8.GetBytes(email);
-        UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData);
-
-        
-
-        yield return www.SendWebRequest();
-
-        if (www.isNetworkError)
+        using (UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:8080/api/kills", myData))
         {
-            Debug.Log(www.error);
-            Debug.Log("peto");
+            yield return www.SendWebRequest();
 
-        }
-        else
-        {
-            Debug.Log("+1");
-        }
+            if (www.isNetworkError)
+            {
+                Debug.Log(www.error);
+                Debug.Log("peto");
+
+            }
+            else
+            {
+                Debug.Log("+1");
+                Debug.Log(www.downloadHandler.text);
+            }
+        };
     }
 }
